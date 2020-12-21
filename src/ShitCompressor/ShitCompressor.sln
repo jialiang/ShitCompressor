@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShitCompressor", "ShitCompressor\ShitCompressor.csproj", "{4AFFAFC6-1701-4479-B446-E2238F8E83E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B245D686-9F2C-4828-91BB-D2BF8F6168F8} = {B245D686-9F2C-4828-91BB-D2BF8F6168F8}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "libwebp-net-core", "..\libwebp-net-core\libwebp-net-core\libwebp-net-core.csproj", "{B245D686-9F2C-4828-91BB-D2BF8F6168F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AFFAFC6-1701-4479-B446-E2238F8E83E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFFAFC6-1701-4479-B446-E2238F8E83E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFFAFC6-1701-4479-B446-E2238F8E83E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFFAFC6-1701-4479-B446-E2238F8E83E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B245D686-9F2C-4828-91BB-D2BF8F6168F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B245D686-9F2C-4828-91BB-D2BF8F6168F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B245D686-9F2C-4828-91BB-D2BF8F6168F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B245D686-9F2C-4828-91BB-D2BF8F6168F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57931B85-A814-4F08-9AB7-74F746F12457}
+	EndGlobalSection
+EndGlobal
