@@ -19,12 +19,14 @@
 
 	<ItemGroup>
 		<None Remove="Exe\butteraugli.exe" />
+		<None Remove="Exe\cjpeg.bat" />
 		<None Remove="Exe\cjpeg.exe" />
 		<None Remove="Exe\cwebp.exe" />
 		<None Remove="Exe\guetzli.exe" />
 		<None Remove="Exe\jpeg62.dll" />
 		<None Remove="Exe\jpegoptim.bat" />
 		<None Remove="Exe\jpegoptim.exe" />
+		<None Remove="Exe\jpegtran.bat" />
 		<None Remove="Exe\jpegtran.exe" />
 		<None Remove="Exe\libpng16.dll" />
 		<None Remove="Exe\lzma.dll" />
@@ -46,14 +48,17 @@
 		<EmbeddedResource Include="Exe\butteraugli.exe">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</EmbeddedResource>
-		<EmbeddedResource Include="Exe\cjpeg.exe">
+		<EmbeddedResource Include="Exe\cjpeg.bat">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Exe\cjpeg.exe">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Exe\cwebp.exe">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Exe\guetzli.exe">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Exe\jpegoptim.bat">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -63,6 +68,9 @@
 		</EmbeddedResource>
 		<EmbeddedResource Include="Exe\jpegoptim.exe">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Exe\jpegtran.bat">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Exe\jpegtran.exe">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -103,6 +111,18 @@
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="System.Drawing.Common" Version="5.0.0" />
 		<PackageReference Include="System.Management" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<TrimmerRootAssembly Include="System.Runtime" />
+		<TrimmerRootAssembly Include="System.Xaml" />
+		<TrimmerRootAssembly Include="System.Runtime.InteropServices" />
+		<TrimmerRootAssembly Include="System.Runtime.Extensions" />
+		<TrimmerRootAssembly Include="System.Threading" />
+		<TrimmerRootAssembly Include="System.Memory" />
+		<TrimmerRootAssembly Include="System.Runtime.CompilerServices.VisualC" />
+		<TrimmerRootAssembly Include="System.Diagnostics.Debug" />
+		<TrimmerRootAssembly Include="System.Collections.NonGeneric" />
 	</ItemGroup>
 
 	<ItemGroup>
