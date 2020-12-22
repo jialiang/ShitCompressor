@@ -24,16 +24,16 @@
             ),
             new EncoderExe(
                 "mozjpeg",
-                "-quality {Quality} -optimize {InputP} > {OutputP}",
-                "cjpeg.exe",
+                "{InputP} {OutputP} {Quality}",
+                "cjpeg.bat",
                 new List<string>(){ "jpg", "png" },
                 "jpg",
                 95
             ),
             new EncoderExe(
                 "jpegtran",
-                "-copy none -optimize {InputP} > {OutputP}",
-                "jpegtran.exe",
+                "{InputP} {OutputP}",
+                "jpegtran.bat",
                 new List<string>(){ "jpg" },
                 "jpg",
                 0

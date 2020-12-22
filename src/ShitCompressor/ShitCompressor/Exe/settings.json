@@ -11,8 +11,8 @@
   },
   {
     "Name": "mozjpeg",
-    "Signature": "-quality {Quality} -optimize {InputP} > {OutputP}",
-    "Filename": "cjpeg.exe",
+    "Signature": "{InputP} {OutputP} {Quality}",
+    "Filename": "cjpeg.bat",
     "DefaultQuality": 95,
     "DefaultEnabled": true,
     "Input": [ "jpg", "png" ],
@@ -21,8 +21,8 @@
   },
   {
     "Name": "jpegtran",
-    "Signature": "-copy none -optimize {InputP} > {OutputP}",
-    "Filename": "jpegtran.exe",
+    "Signature": "{InputP} {OutputP}",
+    "Filename": "jpegtran.bat",
     "DefaultQuality": 0,
     "DefaultEnabled": true,
     "Input": [ "jpg" ],
