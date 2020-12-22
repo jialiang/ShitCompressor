@@ -63,7 +63,7 @@
                             Process childProcess = Process.GetProcessById((int) childProcessId);
                             childProcessList.Add(childProcess);
                         } catch (Exception exception) {
-                            Console.WriteLine(exception.Message);
+                            Debug.WriteLine(exception.Message);
                         }
                     }
                 }

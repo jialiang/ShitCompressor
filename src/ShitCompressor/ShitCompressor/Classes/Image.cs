@@ -79,7 +79,7 @@
                     try {
                         qualityScores[qualityCalculator.Name] = Double.Parse(e.Data);
                     } catch (Exception exception) {
-                        Console.WriteLine($"Error parsing score: {exception.Message}");
+                        Debug.WriteLine($"Error parsing score: {exception.Message}");
                     }
                 };
 
@@ -93,19 +93,19 @@
 
         public async void Optimize() {
             if (Status != "Ready") {
-                Console.WriteLine("Busy");
+                Debug.WriteLine("Busy");
                 return;
             }
 
             if (PendingProcesses.Count != 0) {
-                Console.WriteLine("Optimization already in progress.");
+                Debug.WriteLine("Optimization already in progress.");
                 return;
             }
 
             EncoderExe hasEnabledEncoder = EncoderList.FirstOrDefault(e => e.IsEnabled);
 
             if (hasEnabledEncoder == null) {
-                Console.WriteLine("All encoders disabled.");
+                Debug.WriteLine("All encoders disabled.");
                 return;
             }
 
@@ -221,7 +221,7 @@
                                     normalizedOutputBitmap.Save(normalizedOutputPath, ImageFormat.Png);
                                     filesToCleanup.Add(normalizedOutputPath);
                                 } catch (Exception exception) {
-                                    Console.WriteLine(exception.Message);
+                                    Debug.WriteLine(exception.Message);
                                 }
                             }
 
@@ -265,7 +265,7 @@
             try {
                 await Task.WhenAll(taskList.ToArray());
             } catch (Exception exception) {
-                Console.WriteLine(exception.Message);
+                Debug.WriteLine(exception.Message);
             }
 
             foreach (CancellationTokenSource cancellationTokenSource in CancellationTokenSourceList.ToList()) {
@@ -326,7 +326,7 @@
                         process.Dispose();
                     }
                 } catch (Exception exception) {
-                    Console.WriteLine(exception.Message);
+                    Debug.WriteLine(exception.Message);
                 }
 
                 PendingProcesses.Remove(process);
