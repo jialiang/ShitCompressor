@@ -1,5 +1,7 @@
 # Shit Compressor
 
+![Screenshot](https://user-images.githubusercontent.com/43489288/102893687-f91dd180-449c-11eb-812e-d091c03bb956.png "Screenshot")
+
 [Your shit is _apart_, and it's rather unbecoming of a web developer. It's supposed to be the opposite of that: _together_. Compressed in a small area. To achieve a solid level of shit-compression, squeeze your butt-cheeks together for 30 minutes.](https://discoelysium.gamepedia.com/Volumetric_Shit_Compressor)
 
 ## What is it?
