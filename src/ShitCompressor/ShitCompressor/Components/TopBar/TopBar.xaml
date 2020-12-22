@@ -23,6 +23,10 @@
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -51,6 +55,17 @@
             Foreground="White"
             Text="Settings.json:"
             TextAlignment="Center" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="7"
+            Grid.ColumnSpan="3"
+            Margin="10,0"
+            FontFamily="../../Fonts/#Roboto Medium"
+            FontSize="14"
+            FontStretch="ExtraExpanded"
+            Foreground="White"
+            Text="Sort All Results Asc:"
+            TextAlignment="Center" />
         <Button
             Grid.Row="1"
             Grid.Column="0"
@@ -76,5 +91,20 @@
             Grid.Column="5"
             Click="Settings_Reload_Click"
             Content="Reload" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="7"
+            Click="Size_Sort_Click"
+            Content="Size" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="8"
+            Click="Ssimulacra_Sort_Click"
+            Content="ssimulacra" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="9"
+            Click="Butteraugli_Sort_Click"
+            Content="Butteraugli" />
     </Grid>
 </UserControl>

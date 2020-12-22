@@ -23,7 +23,7 @@
             InitializeComponent();
 
             ActiveGrid = this;
-            this.Loaded += new RoutedEventHandler(OnLoaded);
+            Loaded += new RoutedEventHandler(OnLoaded);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e) {

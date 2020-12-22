@@ -1,6 +1,7 @@
 ﻿namespace ShitCompressor.Components.TopBar {
     using ShitCompressor.Classes;
     using ShitCompressor.utilities;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
     using System.Windows;
@@ -55,6 +56,24 @@
             }
 
             Utilities.Alert(message, "Success");
+        }
+
+        private void Size_Sort_Click(object sender, RoutedEventArgs e) {
+            foreach (CImage image in MainGrid.MainGrid.ImageList) {
+                image.ResultList.Sort("OptimizedSizeText", ListSortDirection.Ascending);
+            }
+        }
+
+        private void Ssimulacra_Sort_Click(object sender, RoutedEventArgs e) {
+            foreach (CImage image in MainGrid.MainGrid.ImageList) {
+                image.ResultList.Sort("Ssimulacra", ListSortDirection.Ascending);
+            }
+        }
+
+        private void Butteraugli_Sort_Click(object sender, RoutedEventArgs e) {
+            foreach (CImage image in MainGrid.MainGrid.ImageList) {
+                image.ResultList.Sort("Butteraugli", ListSortDirection.Ascending);
+            }
         }
     }
 }

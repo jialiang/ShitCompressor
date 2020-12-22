@@ -19,7 +19,19 @@
 
         public SortableBindingList(IList<T> list) {
             foreach (object o in list) {
-                this.Add((T) o);
+                Add((T) o);
+            }
+        }
+
+        public void Sort(string property, ListSortDirection direction) {
+            Type t = GetType().GetGenericArguments().Single();
+            PropertyDescriptorCollection pdc = TypeDescriptor.GetProperties(t);
+
+            foreach (PropertyDescriptor pd in pdc) {
+                if (pd.Name == property) {
+                    ApplySortCore(pd, direction);
+                    break;
+                }
             }
         }
 
@@ -49,12 +61,12 @@
 
                 int newIndex = 0;
                 foreach (object item in query) {
-                    this.Items[newIndex] = (T) item;
+                    Items[newIndex] = (T) item;
                     newIndex++;
                 }
 
                 isSortedValue = true;
-                this.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+                OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
             } else {
                 throw new NotSupportedException("Cannot sort by " + prop.Name +
                     ". This" + prop.PropertyType.ToString() +

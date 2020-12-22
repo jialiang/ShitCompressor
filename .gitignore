@@ -2,3 +2,5 @@
 src/*/*/obj
 src/*/*/bin
 .vs
+*.csproj.user
+*.pubxml.user
