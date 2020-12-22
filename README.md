@@ -1,5 +1,7 @@
 # Shit Compressor
 
+[Your shit is _apart_, and it's rather unbecoming of a web developer. It's supposed to be the opposite of that: _together_. Compressed in a small area. To achieve a solid level of shit-compression, squeeze your butt-cheeks together for 30 minutes.](https://discoelysium.gamepedia.com/Volumetric_Shit_Compressor)
+
 ## What is it?
 
 Image compressor with graphical user interface. Does:
@@ -11,7 +13,7 @@ Image compressor with graphical user interface. Does:
 ## Features
 
 - Generates [SSIMULACRA](https://github.com/cloudinary/ssimulacra) and [Butteraugli](https://github.com/google/butteraugli) scores along with a SSIM Map and Edge Artifact map so that you know how shitty your compressed image is compared to the original.
-- Contains 5 encoders (Guetzli, MozJpeg, JpegOptim and LibWebP) with the ability to preview and choose which output to save.
+- Contains 5 encoders (Guetzli, MozJpeg (lossy and lossless), JpegOptim and LibWebP) with the ability to preview and choose which output to save.
 - Ability to enable encoders and adjust quality setting on a per-image level.
 - Decoupled architecture let's you easily update encoders by replacing existing binaries without recompiling the entire program.
 - Exposed internals let's you set configure all flags and arguments that each encoder offers.
@@ -44,9 +46,9 @@ x64 Windows 10 Version 1607 and above.
 
 ## Which Version to Download?
 
-**Self-Contained** - Larger download (~29MB) and uncompressed size (~109MB), portable since everything you need are bundled together.
+**Self-Contained** - Larger download (~41MB) and uncompressed size (~113MB), portable since everything you need are bundled together.
 
-**Framework Dependent** - Smaller download (~9MB) and uncompressed size (~29MB), but requires the [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/current/runtime) to be installed on your computer to work.
+**Framework Dependent** - Smaller download (~11MB) and uncompressed size (~30MB), but requires the [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/current/runtime) to be installed on your computer to work.
 
 ## Source of Binaries Used
 
