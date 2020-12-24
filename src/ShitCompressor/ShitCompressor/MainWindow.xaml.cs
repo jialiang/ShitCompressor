@@ -1,13 +1,22 @@
 ﻿namespace ShitCompressor {
+    using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Windows;
 
     public partial class MainWindow : Window {
-        public static List<string> PathsToCleanupOnClose { get; set; } = new List<string>();
+        public static MainWindow ActiveWindow { get; set; }
+
+        public List<string> PathsToCleanupOnClose { get; set; } = new List<string>();
+
+        private int IsLoadingCounter = 0;
 
         public MainWindow() {
             InitializeComponent();
+
+            ActiveWindow = this;
+        }
 
         public void ShowLoading() {
             IsLoadingCounter += 1;

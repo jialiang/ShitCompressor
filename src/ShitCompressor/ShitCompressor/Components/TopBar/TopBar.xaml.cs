@@ -21,7 +21,7 @@
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e) {
-            foreach (CImage image in MainGrid.MainGrid.ImageList) {
+            foreach (CImage image in MainGrid.MainGrid.ActiveGrid.ImageList) {
                 if (image.IsSelected) {
                     image.Cancel();
                 }
@@ -29,10 +29,10 @@
         }
 
         private void Clear_Click(object sender, RoutedEventArgs e) {
-            foreach (CImage image in new SortableBindingList<CImage>(MainGrid.MainGrid.ImageList)) {
+            foreach (CImage image in new SortableBindingList<CImage>(MainGrid.MainGrid.ActiveGrid.ImageList)) {
                 if (image.IsSelected) {
                     image.Cancel(true);
-                    MainGrid.MainGrid.ImageList.Remove(image);
+                    MainGrid.MainGrid.ActiveGrid.ImageList.Remove(image);
                 }
             }
         }
@@ -59,19 +59,19 @@
         }
 
         private void Size_Sort_Click(object sender, RoutedEventArgs e) {
-            foreach (CImage image in MainGrid.MainGrid.ImageList) {
+            foreach (CImage image in MainGrid.MainGrid.ActiveGrid.ImageList) {
                 image.ResultList.Sort("OptimizedSizeText", ListSortDirection.Ascending);
             }
         }
 
         private void Ssimulacra_Sort_Click(object sender, RoutedEventArgs e) {
-            foreach (CImage image in MainGrid.MainGrid.ImageList) {
+            foreach (CImage image in MainGrid.MainGrid.ActiveGrid.ImageList) {
                 image.ResultList.Sort("Ssimulacra", ListSortDirection.Ascending);
             }
         }
 
         private void Butteraugli_Sort_Click(object sender, RoutedEventArgs e) {
-            foreach (CImage image in MainGrid.MainGrid.ImageList) {
+            foreach (CImage image in MainGrid.MainGrid.ActiveGrid.ImageList) {
                 image.ResultList.Sort("Butteraugli", ListSortDirection.Ascending);
             }
         }

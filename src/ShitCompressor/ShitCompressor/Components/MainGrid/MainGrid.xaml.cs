@@ -12,7 +12,7 @@
     using System.Windows.Media.Imaging;
 
     public partial class MainGrid : UserControl {
-        public static SortableBindingList<CImage> ImageList { get; set; } = new SortableBindingList<CImage>();
+        public SortableBindingList<CImage> ImageList { get; set; } = new SortableBindingList<CImage>();
 
         public static MainGrid ActiveGrid {
             get; private set;

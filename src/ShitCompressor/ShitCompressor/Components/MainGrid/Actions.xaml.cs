@@ -12,7 +12,7 @@
             CImage image = (CImage) (sender as FrameworkElement).DataContext;
             image.Cancel(true);
 
-            MainGrid.ImageList.Remove(image);
+            MainGrid.ActiveGrid.ImageList.Remove(image);
         }
 
         private void Optimize_Button_Click(object sender, RoutedEventArgs e) {
