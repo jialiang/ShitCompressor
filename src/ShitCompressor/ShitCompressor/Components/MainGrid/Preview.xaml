@@ -11,6 +11,8 @@
         Width="120"
         Height="120"
         Margin="10,5"
+        Cursor="Hand"
+        MouseLeftButtonUp="Image_MouseLeftButtonUp"
         RenderOptions.BitmapScalingMode="Fant"
         Source="{Binding PreviewImage}" />
 </UserControl>
