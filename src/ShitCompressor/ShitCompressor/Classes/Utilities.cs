@@ -78,7 +78,7 @@
 
             graphics.Clear(Color.Black);
             graphics.CompositingMode = CompositingMode.SourceOver;
-            graphics.DrawImage(bitmap, 0, 0);
+            graphics.DrawImage(bitmap, 0, 0, bitmap.Size.Width, bitmap.Size.Height);
 
             return result;
         }
