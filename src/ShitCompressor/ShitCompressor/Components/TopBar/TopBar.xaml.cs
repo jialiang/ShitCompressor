@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
+    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -12,12 +13,18 @@
             InitializeComponent();
         }
 
-        private void Optimize_Click(object sender, RoutedEventArgs e) {
-            foreach (CImage image in MainGrid.MainGrid.ImageList) {
-                if (image.IsSelected) {
-                    image.Optimize();
+        private async void Optimize_Click(object sender, RoutedEventArgs e) {
+            MainWindow.ActiveWindow.ShowLoading();
+
+            await Task.Run(() => {
+                foreach (CImage image in MainGrid.MainGrid.ActiveGrid.ImageList) {
+                    if (image.IsSelected) {
+                        image.Optimize();
+                    }
                 }
-            }
+            });
+
+            MainWindow.ActiveWindow.HideLoading();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e) {

@@ -35,8 +35,7 @@
             }
         }
 
-        protected override void ApplySortCore(PropertyDescriptor prop,
-            ListSortDirection direction) {
+        protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction) {
             Type interfaceType = prop.PropertyType.GetInterface("IComparable");
 
             if (interfaceType == null && prop.PropertyType.IsValueType) {
@@ -51,7 +50,7 @@
                 sortPropertyValue = prop;
                 sortDirectionValue = direction;
 
-                IEnumerable<T> query = base.Items;
+                IEnumerable<T> query = Items;
 
                 if (direction == ListSortDirection.Ascending) {
                     query = query.OrderBy(i => prop.GetValue(i).ToString().Length).ThenBy(i => prop.GetValue(i));

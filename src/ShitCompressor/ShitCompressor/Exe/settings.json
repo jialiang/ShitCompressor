@@ -1,52 +1,57 @@
-﻿[
-  {
-    "Name": "guetzli",
-    "Signature": "--quality {Quality} {InputP} {OutputP}",
-    "Filename": "guetzli.exe",
-    "DefaultQuality": 95,
-    "DefaultEnabled": false,
-    "Input": [ "jpg", "png" ],
-    "Output": "jpg",
-    "Special": false
-  },
-  {
-    "Name": "mozjpeg",
-    "Signature": "{InputP} {OutputP} {Quality}",
-    "Filename": "cjpeg.bat",
-    "DefaultQuality": 95,
-    "DefaultEnabled": true,
-    "Input": [ "jpg", "png" ],
-    "Output": "jpg",
-    "Special": false
-  },
-  {
-    "Name": "jpegtran",
-    "Signature": "{InputP} {OutputP}",
-    "Filename": "jpegtran.bat",
-    "DefaultQuality": 0,
-    "DefaultEnabled": true,
-    "Input": [ "jpg" ],
-    "Output": "jpg",
-    "Special": false
-  },
-  {
-    "Name": "jpegoptim",
-    "Signature": "{InputP} {OutputP} --strip-all --force --max={Quality}",
-    "Filename": "jpegoptim.bat",
-    "DefaultQuality": 95,
-    "DefaultEnabled": true,
-    "Input": [ "jpg" ],
-    "Output": "jpg",
-    "Special": false
-  },
-  {
-    "Name": "webp",
-    "Signature": "-q {Quality} -noalpha {InputP} -o {OutputP}",
-    "Filename": "cwebp.exe",
-    "DefaultQuality": 95,
-    "DefaultEnabled": true,
-    "Input": [ "jpg", "png" ],
-    "Output": "webp",
-    "Special": true
-  }
-]
+﻿{
+  "OutputFolder": "optimized",
+  "OutputSuffix": "(optimized)",
+  "UseButteraugli": false,
+  "EncoderSettings": [
+    {
+      "Name": "guetzli",
+      "Signature": "--quality {Quality} {InputP} {OutputP}",
+      "Filename": "guetzli.exe",
+      "DefaultQuality": 95,
+      "DefaultEnabled": false,
+      "Input": [ "jpg", "png" ],
+      "Output": "jpg",
+      "Special": false
+    },
+    {
+      "Name": "mozjpeg",
+      "Signature": "{InputP} {OutputP} {Quality}",
+      "Filename": "cjpeg.bat",
+      "DefaultQuality": 95,
+      "DefaultEnabled": true,
+      "Input": [ "jpg", "png" ],
+      "Output": "jpg",
+      "Special": false
+    },
+    {
+      "Name": "jpegtran",
+      "Signature": "{InputP} {OutputP}",
+      "Filename": "jpegtran.bat",
+      "DefaultQuality": 0,
+      "DefaultEnabled": true,
+      "Input": [ "jpg" ],
+      "Output": "jpg",
+      "Special": false
+    },
+    {
+      "Name": "jpegoptim",
+      "Signature": "{InputP} {OutputP} --strip-all --force --max={Quality}",
+      "Filename": "jpegoptim.bat",
+      "DefaultQuality": 95,
+      "DefaultEnabled": true,
+      "Input": [ "jpg" ],
+      "Output": "jpg",
+      "Special": false
+    },
+    {
+      "Name": "webp",
+      "Signature": "-q {Quality} -noalpha {InputP} -o {OutputP}",
+      "Filename": "cwebp.exe",
+      "DefaultQuality": 95,
+      "DefaultEnabled": true,
+      "Input": [ "jpg", "png" ],
+      "Output": "webp",
+      "Special": true
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 ﻿namespace ShitCompressor.Classes {
     using ShitCompressor.utilities;
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -15,11 +16,9 @@
     using System.Windows.Media.Imaging;
 
     public class CImage : INotifyPropertyChanged {
-        private static readonly object ThreadLock = new object();
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly List<Process> PendingProcesses = new List<Process>();
+        private readonly ConcurrentDictionary<string, Process> PendingProcesses = new ConcurrentDictionary<string, Process>();
         private readonly List<CancellationTokenSource> CancellationTokenSourceList = new List<CancellationTokenSource>();
 
         public FileInfo InputInfo { get; private set; }
@@ -64,6 +63,10 @@
             foreach (Exe qualityCalculator in Globals.qualityCalculators) {
                 qualityScores.Add(qualityCalculator.Name, -1.0);
 
+                if (qualityCalculator.Name == "butteraugli" && !Globals.UseButteraugli) {
+                    continue;
+                }
+
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "exe", qualityCalculator.Filename);
                 string arguments = qualityCalculator.Signature.
                     Replace("{InputP}", $"\"{inputPathname}\"").
@@ -77,7 +80,7 @@
                     }
 
                     try {
-                        qualityScores[qualityCalculator.Name] = Double.Parse(e.Data);
+                        qualityScores[qualityCalculator.Name] = double.Parse(e.Data);
                     } catch (Exception exception) {
                         Debug.WriteLine($"Error parsing score: {exception.Message}");
                     }
@@ -91,31 +94,13 @@
             return qualityScores;
         }
 
-        public async void Optimize() {
-            if (Status != "Ready") {
-                Debug.WriteLine("Busy");
-                return;
-            }
-
-            if (PendingProcesses.Count != 0) {
-                Debug.WriteLine("Optimization already in progress.");
-                return;
-            }
-
-            EncoderExe hasEnabledEncoder = EncoderList.FirstOrDefault(e => e.IsEnabled);
-
-            if (hasEnabledEncoder == null) {
-                Debug.WriteLine("All encoders disabled.");
-                return;
-            }
-
-            Status = "Working";
-            OnPropertyChanged("Status");
+        private void Optimize(DateTime startTime) {
+            string startTimeText = $"{startTime:h:mm:ss tt}";
 
             Random random = new Random();
 
-            List<Task> taskList = new List<Task>();
             List<Result> thisRunResultList = new List<Result>();
+            List<Task> taskList = new List<Task>();
             List<string> filesToCleanup = new List<string>();
 
             string exeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "exe");
@@ -128,7 +113,7 @@
             string inputPathname = InputInfo.FullName;
             string normalizedInputPath = inputPathname;
 
-            if (InputInfo.Extension == ".png") {
+            if (InputInfo.Extension == ".png" && Status == "Working") {
                 using Bitmap inputBitmap = new Bitmap(inputPathname);
                 if (Image.IsAlphaPixelFormat(inputBitmap.PixelFormat)) {
                     using Bitmap normalizedInputBitmap = Utilities.RemoveAlpha(inputBitmap);
@@ -139,7 +124,7 @@
             }
 
             foreach (EncoderExe encoder in EncoderList) {
-                if (!encoder.IsEnabled) {
+                if (!encoder.IsEnabled || Status != "Working") {
                     continue;
                 }
 
@@ -147,15 +132,6 @@
                 CancellationTokenSourceList.Add(cancellationTokenSource);
 
                 Task task = Task.Run(() => {
-                    Utilities.GlobalProcessSemaphore.Wait(cancellationTokenSource.Token);
-
-                    cancellationTokenSource.Token.Register(() => {
-                        Utilities.GlobalProcessSemaphore.Release();
-                    });
-
-                    DateTime startTime = DateTime.Now;
-                    string startTimeText = $"{startTime:h:mm:ss tt}";
-
                     string outputFilename = Utilities.ChangeExtension(
                         Utilities.AppendToFilename(InputInfo.Name, $"({encoder.Name}) ({encoder.Quality}) ({random.Next()})"),
                         encoder.Output
@@ -165,20 +141,20 @@
                     string quality = encoder.Quality.ToString();
                     string pathToEncoder = Path.Combine(exeDirectory, encoder.Filename);
                     string arguments = encoder.Signature.
-                        Replace("{InputP}", $"\"{inputPathname}\"").
+                        Replace("{InputP}", $"\"{normalizedInputPath}\"").
                         Replace("{OutputP}", $"\"{outputPathname}\"").
                         Replace("{Quality}", quality);
 
                     cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
                     using (Process process = Utilities.ProcessCreator(pathToEncoder, arguments)) {
-                        PendingProcesses.Add(process);
+                        PendingProcesses.TryAdd(encoder.Name, process);
 
                         process.Start();
                         process.BeginOutputReadLine();
                         process.WaitForExit();
 
-                        PendingProcesses.Remove(process);
+                        PendingProcesses.TryRemove(new KeyValuePair<string, Process>(encoder.Name, process));
                     }
 
                     FileInfo outputInfo = new FileInfo(outputPathname);
@@ -209,20 +185,16 @@
                             cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
                             if (outputInfo.Extension == ".webp") {
-                                try {
-                                    byte[] outputBytes = File.ReadAllBytes(outputInfo.FullName);
+                                byte[] outputBytes = File.ReadAllBytes(outputInfo.FullName);
 
-                                    using Bitmap normalizedOutputBitmap = Utilities.RemoveAlpha(
-                                        Imazen.WebP.SimpleDecoder.DecodeFromBytes(outputBytes, outputBytes.Length)
-                                    );
-                                    normalizedOutputPath = Path.Combine(
-                                        tempOutputDirectory, Utilities.ChangeExtension(outputFilename, "png")
-                                    );
-                                    normalizedOutputBitmap.Save(normalizedOutputPath, ImageFormat.Png);
-                                    filesToCleanup.Add(normalizedOutputPath);
-                                } catch (Exception exception) {
-                                    Debug.WriteLine(exception.Message);
-                                }
+                                using Bitmap normalizedOutputBitmap = Utilities.RemoveAlpha(
+                                    Imazen.WebP.SimpleDecoder.DecodeFromBytes(outputBytes, outputBytes.Length)
+                                );
+                                normalizedOutputPath = Path.Combine(
+                                    tempOutputDirectory, Utilities.ChangeExtension(outputFilename, "png")
+                                );
+                                normalizedOutputBitmap.Save(normalizedOutputPath, ImageFormat.Png);
+                                filesToCleanup.Add(normalizedOutputPath);
                             }
 
                             cancellationTokenSource.Token.ThrowIfCancellationRequested();
@@ -245,25 +217,19 @@
                             startTimeText
                         );
 
-                        lock (ThreadLock) {
-                            Application.Current.Dispatcher.BeginInvoke(
-                                new Action(() => { ResultList.Add(result); })
-                            );
-                        }
+                        Application.Current.Dispatcher.Invoke(
+                            new Action(() => { ResultList.Add(result); })
+                        );
                     }
 
                     thisRunResultList.Add(result);
-
-                    if (!cancellationTokenSource.Token.IsCancellationRequested) {
-                        Utilities.GlobalProcessSemaphore.Release();
-                    }
                 }, cancellationTokenSource.Token);
 
                 taskList.Add(task);
             }
 
             try {
-                await Task.WhenAll(taskList.ToArray());
+                Task.WaitAll(taskList.ToArray());
             } catch (Exception exception) {
                 Debug.WriteLine(exception.Message);
             }
@@ -301,6 +267,33 @@
                     resultWithSmallestSize.SetPreferred();
                 }
             }
+        }
+
+        public async void Optimize() {
+            if (Status != "Ready") {
+                Debug.WriteLine("Busy");
+                return;
+            }
+
+            if (!PendingProcesses.IsEmpty) {
+                Debug.WriteLine("Optimization already in progress.");
+                return;
+            }
+
+            EncoderExe hasEnabledEncoder = EncoderList.FirstOrDefault(e => e.IsEnabled);
+
+            if (hasEnabledEncoder == null) {
+                Debug.WriteLine("All encoders disabled.");
+                return;
+            }
+
+            Status = "Working";
+            OnPropertyChanged("Status");
+
+            DateTime startTime = DateTime.Now;
+            await Task.Run(() => {
+                Optimize(startTime);
+            });
 
             Status = "Ready";
             OnPropertyChanged("Status");
@@ -312,7 +305,7 @@
                 CancellationTokenSourceList.Remove(cancellationTokenSource);
             }
 
-            foreach (Process process in PendingProcesses.ToList()) {
+            foreach (Process process in PendingProcesses.Values) {
                 try {
                     if (!process.HasExited) {
                         List<Process> childProcessList = Utilities.GetAllChildProcesses((UInt32) process.Id);
@@ -328,15 +321,13 @@
                 } catch (Exception exception) {
                     Debug.WriteLine(exception.Message);
                 }
-
-                PendingProcesses.Remove(process);
             }
 
+            PendingProcesses.Clear();
+
             if (!willBeRemoved) {
-                if (PendingProcesses.Count == 0) {
-                    Status = "Ready";
-                    OnPropertyChanged("Status");
-                }
+                Status = "Ready";
+                OnPropertyChanged("Status");
             }
         }
 
@@ -351,6 +342,14 @@
         public void UpdateIsSelected(bool value) {
             IsSelected = value;
             OnPropertyChanged("IsSelected");
+        }
+
+        public void OpenInput() {
+            try {
+                Process.Start("explorer", InputInfo.FullName);
+            } catch (Exception exception) {
+                Utilities.Alert(exception.Message);
+            }
         }
     }
 }

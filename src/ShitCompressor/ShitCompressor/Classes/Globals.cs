@@ -5,11 +5,13 @@
     using System.IO;
 
     internal static class Globals {
-        public static readonly String[] ValidExtensions = { ".jpg", ".png" };
+        public static readonly string[] ValidExtensions = { ".jpg", ".png" };
 
-        public static readonly string TempStorageFolder = "shit-compressor-temp";
+        public static string TempStorageFolder { get; private set; } = "shit-compressor-temp";
 
-        public static readonly string OutputFolder = "optimized";
+        public static string OutputFolder { get; private set; } = "optimized";
+
+        public static string OutputSuffix { get; private set; } = "(optimized)";
 
         public static readonly List<EncoderExe> AllEncoders = new List<EncoderExe>()
         {
@@ -58,7 +60,7 @@
             )
         };
 
-        public static List<EncoderExe> AllEncodersFromSettings = null;
+        public static List<EncoderExe> AllEncodersFromSettings { get; private set; } = null;
 
         public static readonly List<Exe> qualityCalculators = new List<Exe>()
         {
@@ -66,15 +68,22 @@
             new Exe("ssimulacra", "{InputP} {OutputP} {MapP}", "ssimulacra.exe")
         };
 
+        public static bool UseButteraugli { get; private set; } = false;
+
         public static string SetAllEncodersFromSettings() {
             string pathToSettings = Path.Combine(Directory.GetCurrentDirectory(), "exe", "settings.json");
 
             try {
                 string settingsString = File.ReadAllText(pathToSettings);
                 dynamic settings = JsonConvert.DeserializeObject(settingsString);
+
+                OutputFolder = (string) settings.OutputFolder ?? OutputFolder;
+                OutputSuffix = (string) settings.OutputSuffix ?? OutputSuffix;
+                UseButteraugli = (bool) (settings.UseButteraugli ?? UseButteraugli);
+
                 List<EncoderExe> encoderList = new List<EncoderExe>();
 
-                foreach (var setting in settings) {
+                foreach (var setting in settings.EncoderSettings) {
                     List<string> settingInput = new List<string>();
 
                     foreach (string input in setting.Input) {

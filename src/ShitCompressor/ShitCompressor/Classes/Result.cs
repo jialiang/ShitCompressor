@@ -99,7 +99,7 @@
 
             string parentDir = InputInfo.DirectoryName;
             string preferredFileName = Utilities.ChangeExtension(
-                Utilities.AppendToFilename(InputInfo.Name, "(optimized)"),
+                Utilities.AppendToFilename(InputInfo.Name, Globals.OutputSuffix),
                 EncoderOutputFormat
             );
 

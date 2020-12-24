@@ -9,7 +9,6 @@
     using System.Management;
     using System.Security.Cryptography;
     using System.Text;
-    using System.Threading;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Media;
@@ -35,8 +34,8 @@
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.Arguments = $"/c \"\"{filename}\" {arguments}\"";
+            process.StartInfo.FileName = filename;
+            process.StartInfo.Arguments = arguments;
             process.StartInfo.RedirectStandardOutput = true;
 
             process.EnableRaisingEvents = true;
@@ -55,7 +54,7 @@
 
             if (collection.Count > 0) {
                 foreach (var item in collection) {
-                    UInt32 childProcessId = (UInt32) item["ProcessId"];
+                    uint childProcessId = (uint) item["ProcessId"];
                     if ((int) childProcessId != Environment.ProcessId) {
                         childProcessList.AddRange(GetAllChildProcesses(childProcessId));
 
@@ -111,7 +110,5 @@
                 MessageBoxOptions.DefaultDesktopOnly
             );
         }
-
-        public static SemaphoreSlim GlobalProcessSemaphore = new SemaphoreSlim(Environment.ProcessorCount, Environment.ProcessorCount);
     }
 }
