@@ -32,8 +32,7 @@
             GridLinesVisibility="None"
             ItemsSource="{Binding ElementName=mainGrid, Path=ImageList}"
             MaxColumnWidth="140"
-            RowHeaderWidth="0"
-            ScrollViewer.CanContentScroll="False">
+            RowHeaderWidth="0">
 
             <DataGrid.Resources>
                 <ResourceDictionary>
