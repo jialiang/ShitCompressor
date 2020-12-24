@@ -9,8 +9,8 @@
     x:Name="mainWindow"
     Title="Shit Compressor"
     Width="1366"
-    Height="595"
-    Closing="MainWindow_Closing"
+    Height="640"
+    Closed="MainWindow_Closed"
     FontFamily="./Fonts/#Roboto"
     FontSize="12.5"
     mc:Ignorable="d">

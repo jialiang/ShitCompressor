@@ -21,10 +21,12 @@
             }
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+        private void MainWindow_Closed(object sender, EventArgs e) {
             foreach (string path in PathsToCleanupOnClose) {
-                if (Directory.Exists(path)) {
+                try {
                     Directory.Delete(path, true);
+                } catch (Exception exception) {
+                    Debug.WriteLine(exception.Message);
                 }
             }
         }
