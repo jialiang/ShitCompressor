@@ -68,32 +68,33 @@
                         continue;
                     }
 
-                    BitmapImage preview;
+                    BitmapImage preview = new BitmapImage();
 
                     try {
-                        preview = new BitmapImage();
+                        using Stream fs = new FileStream(pathname, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
                         preview.BeginInit();
+                        preview.StreamSource = fs;
+                        preview.DecodePixelWidth = 240;
                         preview.CacheOption = BitmapCacheOption.OnLoad;
-                        preview.UriSource = new Uri(pathname);
                         preview.EndInit();
                         preview.Freeze();
                     } catch (Exception exception) {
-                        errorMessages.Add($"Error decoding {pathname}: {exception.Message}");
-                        return;
-                    };
-
-                    try {
-                        using FileStream fs = new FileStream(pathname, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-                    } catch (Exception exception) {
-                        errorMessages.Add($"Permission error with {pathname}: {exception.Message}");
-                        return;
+                        errorMessages.Add($"Error with readding {pathname} as image file: {exception.Message}");
+                        continue;
                     }
 
                     Application.Current.Dispatcher.Invoke(
-                        new Action(() => { ImageList.Add(new CImage(inputInfo, preview)); })
+                        new Action(() => {
+                            ImageList.Add(new CImage(inputInfo, preview));
+                            scrollViewer.ScrollToBottom();
+                        })
                     );
 
-                    MainWindow.PathsToCleanupOnClose.Add(Path.Combine(Path.GetDirectoryName(pathname), Globals.TempStorageFolder));
+                    string tempFolder = Path.Combine(Path.GetDirectoryName(pathname), Globals.TempStorageFolder);
+
+                    if (MainWindow.ActiveWindow.PathsToCleanupOnClose.Find((path) => path.Equals(tempFolder)) == null) {
+                        MainWindow.ActiveWindow.PathsToCleanupOnClose.Add(tempFolder);
+                    }
                 }
             });
 
