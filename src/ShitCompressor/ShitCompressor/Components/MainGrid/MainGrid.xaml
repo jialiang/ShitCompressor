@@ -11,126 +11,155 @@
     AllowDrop="True"
     Drop="File_Drop"
     mc:Ignorable="d">
-    <DataGrid
-        x:Name="dataGrid"
-        AutoGenerateColumns="False"
-        Background="#aa000000"
-        BorderThickness="0"
-        ColumnWidth="Auto"
-        FrozenColumnCount="2"
-        GridLinesVisibility="None"
-        ItemsSource="{Binding ElementName=mainGrid, Path=ImageList}"
-        MaxColumnWidth="140"
-        RowHeaderWidth="0"
-        ScrollViewer.CanContentScroll="False">
 
-        <DataGrid.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="../DefaultStyles.xaml" />
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </DataGrid.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <DataGrid.Columns>
-            <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True">
-                <DataGridTemplateColumn.Header>
-                    <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" />
-                </DataGridTemplateColumn.Header>
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
-                            <CheckBox.Style>
-                                <Style TargetType="CheckBox">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                </Style>
-                            </CheckBox.Style>
-                        </CheckBox>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Preview" IsReadOnly="True">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <local:Preview />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Filename" IsReadOnly="True">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <local:Filename />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                Header="Original Size"
-                IsReadOnly="True"
-                SortMemberPath="OriginalSizeText">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <local:OriginalSize />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn Header="Actions" IsReadOnly="True">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <local:Actions />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                Header="Status"
-                IsReadOnly="True"
-                SortMemberPath="Status">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <local:Status />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-                <DataGridTemplateColumn.CellStyle>
-                    <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="DataGridCell">
-                        <Setter Property="BorderThickness" Value="0,0,1,0" />
-                        <Setter Property="BorderBrush" Value="#e4e5e9" />
-                    </Style>
-                </DataGridTemplateColumn.CellStyle>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                Width="200"
-                MaxWidth="200"
-                CanUserResize="False"
-                Header="Settings"
-                IsReadOnly="True">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <local:Settings />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-                <DataGridTemplateColumn.CellStyle>
-                    <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="DataGridCell">
-                        <Setter Property="BorderThickness" Value="1,0" />
-                        <Setter Property="BorderBrush" Value="#e4e5e9" />
-                    </Style>
-                </DataGridTemplateColumn.CellStyle>
-            </DataGridTemplateColumn>
-            <DataGridTemplateColumn
-                MaxWidth="Infinity"
-                Header="Results"
-                IsReadOnly="True">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <local:Results />
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-                <DataGridTemplateColumn.CellStyle>
-                    <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="DataGridCell">
-                        <Setter Property="BorderThickness" Value="1,0,0,0" />
-                        <Setter Property="BorderBrush" Value="#e4e5e9" />
-                    </Style>
-                </DataGridTemplateColumn.CellStyle>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
-    </DataGrid>
+        <DataGrid
+            x:Name="dataGrid"
+            Grid.Row="0"
+            Grid.Column="0"
+            AutoGenerateColumns="False"
+            Background="#aa000000"
+            BorderThickness="0"
+            ColumnWidth="Auto"
+            FrozenColumnCount="2"
+            GridLinesVisibility="None"
+            ItemsSource="{Binding ElementName=mainGrid, Path=ImageList}"
+            MaxColumnWidth="140"
+            RowHeaderWidth="0"
+            ScrollViewer.CanContentScroll="False">
+
+            <DataGrid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="../DefaultStyles.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn CanUserResize="False" IsReadOnly="True">
+                    <DataGridTemplateColumn.Header>
+                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" />
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                                <CheckBox.Style>
+                                    <Style TargetType="CheckBox">
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </CheckBox.Style>
+                            </CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Preview" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:Preview />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Filename" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:Filename />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Header="Original Size"
+                    IsReadOnly="True"
+                    SortMemberPath="OriginalSizeText">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:OriginalSize />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Actions" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:Actions />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Header="Status"
+                    IsReadOnly="True"
+                    SortMemberPath="Status">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:Status />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="DataGridCell">
+                            <Setter Property="BorderThickness" Value="0,0,1,0" />
+                            <Setter Property="BorderBrush" Value="#e4e5e9" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    Width="200"
+                    MaxWidth="200"
+                    CanUserResize="False"
+                    Header="Settings"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:Settings />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="DataGridCell">
+                            <Setter Property="BorderThickness" Value="1,0" />
+                            <Setter Property="BorderBrush" Value="#e4e5e9" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn
+                    MaxWidth="Infinity"
+                    Header="Results"
+                    IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:Results />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style BasedOn="{StaticResource {x:Type DataGridCell}}" TargetType="DataGridCell">
+                            <Setter Property="BorderThickness" Value="1,0,0,0" />
+                            <Setter Property="BorderBrush" Value="#e4e5e9" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Border
+            x:Name="LoadingCover"
+            Grid.Row="0"
+            Grid.Column="0"
+            Background="#cc000000"
+            Visibility="Collapsed">
+            <TextBlock
+                Padding="0,10"
+                VerticalAlignment="Center"
+                Background="Black"
+                FontFamily="../../Fonts/#Roboto Medium"
+                FontSize="22"
+                Foreground="White"
+                Text="Loading..."
+                TextAlignment="Center" />
+        </Border>
+    </Grid>
 </UserControl>
