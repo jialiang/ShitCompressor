@@ -90,5 +90,24 @@
                 </Style>
             </Image.Style>
         </Image>
+
+        <Border
+            x:Name="LoadingScreen"
+            Grid.Row="0"
+            Grid.RowSpan="99"
+            Grid.Column="0"
+            Grid.ColumnSpan="99"
+            Background="#cc000000"
+            Visibility="Collapsed">
+            <TextBlock
+                Padding="0,10"
+                VerticalAlignment="Center"
+                Background="Black"
+                FontFamily="../../Fonts/#Roboto Medium"
+                FontSize="22"
+                Foreground="White"
+                Text="Preparing..."
+                TextAlignment="Center" />
+        </Border>
     </Grid>
 </Window>

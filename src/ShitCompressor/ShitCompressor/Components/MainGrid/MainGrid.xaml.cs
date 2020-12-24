@@ -52,7 +52,7 @@
                 errorMessages.Add(errorParsingSettings);
             }
 
-            LoadingCover.Visibility = Visibility.Visible;
+            MainWindow.ActiveWindow.ShowLoading();
 
             await Task.Run(() => {
                 foreach (string pathname in droppedFilePathnames) {
@@ -97,11 +97,11 @@
                 }
             });
 
+            MainWindow.ActiveWindow.HideLoading();
+
             if (errorMessages.Count != 0) {
                 Utilities.Alert(string.Join("\n\n", errorMessages.ToArray()));
             }
-
-            LoadingCover.Visibility = Visibility.Collapsed;
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e) {

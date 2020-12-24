@@ -8,6 +8,17 @@
 
         public MainWindow() {
             InitializeComponent();
+
+        public void ShowLoading() {
+            IsLoadingCounter += 1;
+            LoadingScreen.Visibility = Visibility.Visible;
+        }
+
+        public void HideLoading() {
+            IsLoadingCounter -= 1;
+            if (IsLoadingCounter == 0) {
+                LoadingScreen.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e) {

@@ -144,22 +144,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-        <Border
-            x:Name="LoadingCover"
-            Grid.Row="0"
-            Grid.Column="0"
-            Background="#cc000000"
-            Visibility="Collapsed">
-            <TextBlock
-                Padding="0,10"
-                VerticalAlignment="Center"
-                Background="Black"
-                FontFamily="../../Fonts/#Roboto Medium"
-                FontSize="22"
-                Foreground="White"
-                Text="Loading..."
-                TextAlignment="Center" />
-        </Border>
     </Grid>
 </UserControl>
