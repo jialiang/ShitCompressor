@@ -111,7 +111,7 @@
                 IsReadOnly="True" />
             <DataGridTextColumn
                 Binding="{Binding Ssimulacra}"
-                Header="ssimulacra"
+                Header="Ssimulacra"
                 IsReadOnly="True" />
             <DataGridTextColumn
                 Binding="{Binding Butteraugli}"

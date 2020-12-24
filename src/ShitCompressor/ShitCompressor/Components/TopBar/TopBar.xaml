@@ -64,7 +64,7 @@
             FontSize="14"
             FontStretch="ExtraExpanded"
             Foreground="White"
-            Text="Sort All Results Asc:"
+            Text="Sort All Results Ascending:"
             TextAlignment="Center" />
         <Button
             Grid.Row="1"
@@ -100,7 +100,7 @@
             Grid.Row="1"
             Grid.Column="8"
             Click="Ssimulacra_Sort_Click"
-            Content="ssimulacra" />
+            Content="Ssimulacra" />
         <Button
             Grid.Row="1"
             Grid.Column="9"
