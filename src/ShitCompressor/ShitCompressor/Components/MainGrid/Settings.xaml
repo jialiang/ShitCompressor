@@ -45,7 +45,7 @@
         </DataGrid.Resources>
 
         <DataGrid.Columns>
-            <DataGridCheckBoxColumn Binding="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}">
+            <DataGridCheckBoxColumn Width="30" Binding="{Binding IsEnabled, UpdateSourceTrigger=PropertyChanged}">
                 <DataGridCheckBoxColumn.HeaderStyle>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="DataGridColumnHeader">
                         <Setter Property="Margin" Value="-1,0,0,0" />
@@ -59,7 +59,7 @@
                 </DataGridCheckBoxColumn.ElementStyle>
             </DataGridCheckBoxColumn>
             <DataGridTextColumn
-                Width="*"
+                Width="108"
                 Binding="{Binding Name}"
                 Header="Encoder"
                 IsReadOnly="True">
