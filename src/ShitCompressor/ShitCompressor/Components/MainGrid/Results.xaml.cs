@@ -11,10 +11,7 @@
 
         private void RadioButton_Checked(object sender, System.Windows.RoutedEventArgs e) {
             Result result = (Result) (sender as FrameworkElement).DataContext;
-
-            if (!result.IsPreferred) {
-                result.SetPreferred();
-            }
+            result.SetPreferred();
         }
 
         private void Size_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
