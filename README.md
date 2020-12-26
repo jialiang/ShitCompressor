@@ -1,8 +1,8 @@
 # Shit Compressor
 
-![Screenshot](https://user-images.githubusercontent.com/43489288/102893687-f91dd180-449c-11eb-812e-d091c03bb956.png "Screenshot")
+![Screenshot](https://user-images.githubusercontent.com/43489288/103145948-d03b5c00-477c-11eb-814c-95611c877a92.jpg "Screenshot")
 
-[Your shit is _apart_, and it's rather unbecoming of a web developer. It's supposed to be the opposite of that: _together_. Compressed in a small area. To achieve a solid level of shit-compression, squeeze your butt-cheeks together for 30 minutes.](https://discoelysium.gamepedia.com/Volumetric_Shit_Compressor)
+[Your shit is _apart_, and it's rather unbecoming of a web developer. It's supposed to be the opposite of that: _together_. Compressed in a small area.](https://discoelysium.gamepedia.com/Volumetric_Shit_Compressor)
 
 ## What is it?
 
@@ -22,19 +22,21 @@ Image compressor with graphical user interface. Does:
 
 ## Usage
 
-Drop and drop images > Optimize!
+**Drop and drop images > Optimize!**
 
-The preferred output will be saved in a folder called "optimized" located in the same folder as the input file.
-If it's the first optimization run for that image, the smallest output of each format will be automatically designated the preferred output.
-You can use the radio button to designate another output as preferred.
+- The preferred output will be saved in a folder called "optimized" located in the same folder as the input file.
 
-Successful outputs with the same MD5 hash are grouped together into a single entry.
+- If it's the first optimization run for that image, the smallest output of each format will be automatically designated the preferred output.
+- You can use the radio button to designate another output as preferred.
+- Successful outputs with the same MD5 hash are grouped together into a single entry.
+- Guetzli and Butteraugli are disabled by default because **THEY ARE SLOW** and not necessarily any better. Enable them in the settings if you want.
 
-Ssimulacra advises that:
+**Ssimulacra advises that:**
+
 If the Ssimulacra score is above 0.1 (or so), the distortion is likely to be perceptible / annoying.
 If the Ssimulacra score is below 0.01 (or so), the distortion is likely to be imperceptible.
 
-Butteraugli did not provide any advice on interpreting its score.
+**Butteraugli did not provide any advice on interpreting its score.**
 
 ## Technical
 
@@ -48,7 +50,7 @@ x64 Windows 10 Version 1607 and above.
 
 ## Which Version to Download?
 
-**Self-Contained** - Larger download (~41MB) and uncompressed size (~113MB), portable since everything you need are bundled together.
+**Self-Contained** - Larger download (~50MB) and uncompressed size (~165MB), portable since everything you need are bundled together.
 
 **Framework Dependent** - Smaller download (~11MB) and uncompressed size (~30MB), but requires the [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/current/runtime) to be installed on your computer to work.
 
@@ -66,3 +68,12 @@ Dependencies of binaries downloaded and built using Vcpkg.
 ## Credits
 
 The dependency libwebp-net-core is my own .NET 5.0 port of Imazen's [libwebp-net](https://github.com/imazen/libwebp-net).
+
+## Known Issues
+
+- Fails with input filepaths containing non-ASCII characters. All the binaries used were built with C++ which doesn't natively handle arguments containing non-ASCII characters.
+- Generally only 8 bit per pixel RGB or RGBA PNG or 8 bit per pixel JPG is fully supported. Indexed colors work fine too. Also, I think it's best to make sure your input is sRGB color profile and 2.2 gamma.
+
+## Note
+
+I'm not affiliated with Zaum, I just got the inspiration to create this after playing Disco Elysium.
