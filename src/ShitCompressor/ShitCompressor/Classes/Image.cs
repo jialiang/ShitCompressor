@@ -166,7 +166,7 @@
 
                     if (!hasErrorWithOutput) {
                         outputMd5 = Utilities.CheckMD5(outputInfo.FullName);
-                        result = ResultList.SingleOrDefault(r => r.Md5 == outputMd5);
+                        result = ResultList.SingleOrDefault(r => r.Md5 == outputMd5 && (quality == r.QualitySetting || quality == "0"));
 
                         // MD5 matches existing entry, update existing entry
                         if (result != null) {
