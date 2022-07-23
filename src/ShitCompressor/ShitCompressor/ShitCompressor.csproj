@@ -142,7 +142,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="libwebp.dll">
+		<None Update="webp.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
