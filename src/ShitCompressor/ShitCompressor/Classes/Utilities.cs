@@ -29,7 +29,7 @@
         }
 
         public static Process ProcessCreator(string filename, string arguments) {
-            Process process = new Process();
+            Process process = new();
 
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
@@ -44,13 +44,13 @@
         }
 
         public static List<Process> GetAllChildProcesses(UInt32 parentProcessId) {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(
+            ManagementObjectSearcher searcher = new(
                 "SELECT * " +
                 "FROM Win32_Process " +
                 "WHERE ParentProcessId=" + parentProcessId);
             ManagementObjectCollection collection = searcher.Get();
 
-            List<Process> childProcessList = new List<Process>();
+            List<Process> childProcessList = new();
 
             if (collection.Count > 0) {
                 foreach (var item in collection) {
@@ -72,7 +72,7 @@
         }
 
         public static Bitmap RemoveAlpha(Bitmap bitmap) {
-            Bitmap result = new Bitmap(bitmap.Size.Width, bitmap.Size.Height, PixelFormat.Format24bppRgb);
+            Bitmap result = new(bitmap.Size.Width, bitmap.Size.Height, PixelFormat.Format24bppRgb);
             Graphics graphics = Graphics.FromImage(result);
 
             graphics.Clear(Color.Black);

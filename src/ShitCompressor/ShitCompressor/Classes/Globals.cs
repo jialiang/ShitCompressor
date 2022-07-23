@@ -13,7 +13,7 @@
 
         public static string OutputSuffix { get; private set; } = "(optimized)";
 
-        public static readonly List<EncoderExe> AllEncoders = new List<EncoderExe>()
+        public static readonly List<EncoderExe> AllEncoders = new()
         {
             new EncoderExe(
                 "guetzli",
@@ -62,7 +62,7 @@
 
         public static List<EncoderExe> AllEncodersFromSettings { get; private set; } = null;
 
-        public static readonly List<Exe> qualityCalculators = new List<Exe>()
+        public static readonly List<Exe> qualityCalculators = new()
         {
             new Exe("butteraugli", "{InputP} {OutputP}", "butteraugli.exe"),
             new Exe("ssimulacra", "{InputP} {OutputP} {MapP}", "ssimulacra.exe")
@@ -81,10 +81,10 @@
                 OutputSuffix = (string) settings.OutputSuffix ?? OutputSuffix;
                 UseButteraugli = (bool) (settings.UseButteraugli ?? UseButteraugli);
 
-                List<EncoderExe> encoderList = new List<EncoderExe>();
+                List<EncoderExe> encoderList = new();
 
                 foreach (var setting in settings.EncoderSettings) {
-                    List<string> settingInput = new List<string>();
+                    List<string> settingInput = new();
 
                     foreach (string input in setting.Input) {
                         settingInput.Add(input);

@@ -18,8 +18,8 @@
     public class CImage : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly ConcurrentDictionary<string, Process> PendingProcesses = new ConcurrentDictionary<string, Process>();
-        private readonly List<CancellationTokenSource> CancellationTokenSourceList = new List<CancellationTokenSource>();
+        private readonly ConcurrentDictionary<string, Process> PendingProcesses = new();
+        private readonly List<CancellationTokenSource> CancellationTokenSourceList = new();
 
         public FileInfo InputInfo { get; private set; }
 
@@ -58,7 +58,7 @@
         }
 
         private static Dictionary<string, double> GetQualityScores(string inputPathname, string outputPathname, string mapPathname) {
-            Dictionary<string, double> qualityScores = new Dictionary<string, double>();
+            Dictionary<string, double> qualityScores = new();
 
             foreach (Exe qualityCalculator in Globals.qualityCalculators) {
                 qualityScores.Add(qualityCalculator.Name, -1.0);
@@ -97,11 +97,11 @@
         private void Optimize(DateTime startTime) {
             string startTimeText = $"{startTime:h:mm:ss tt}";
 
-            Random random = new Random();
+            Random random = new();
 
-            List<Result> thisRunResultList = new List<Result>();
-            List<Task> taskList = new List<Task>();
-            List<string> filesToCleanup = new List<string>();
+            List<Result> thisRunResultList = new();
+            List<Task> taskList = new();
+            List<string> filesToCleanup = new();
 
             string exeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "exe");
             string tempOutputDirectory = Path.Combine(InputInfo.DirectoryName, Globals.TempStorageFolder);
@@ -114,7 +114,7 @@
             string normalizedInputPath = inputPathname;
 
             if (InputInfo.Extension == ".png" && Status == "Working") {
-                using Bitmap inputBitmap = new Bitmap(inputPathname);
+                using Bitmap inputBitmap = new(inputPathname);
                 if (Image.IsAlphaPixelFormat(inputBitmap.PixelFormat)) {
                     using Bitmap normalizedInputBitmap = Utilities.RemoveAlpha(inputBitmap);
                     normalizedInputPath = Path.Combine(tempOutputDirectory, $"{random.Next()}-in.png");
@@ -128,7 +128,7 @@
                     continue;
                 }
 
-                CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+                CancellationTokenSource cancellationTokenSource = new();
                 CancellationTokenSourceList.Add(cancellationTokenSource);
 
                 Task task = Task.Run(() => {
@@ -157,7 +157,7 @@
                         PendingProcesses.TryRemove(new KeyValuePair<string, Process>(encoder.Name, process));
                     }
 
-                    FileInfo outputInfo = new FileInfo(outputPathname);
+                    FileInfo outputInfo = new(outputPathname);
                     bool hasErrorWithOutput = !outputInfo.Exists || outputInfo.Length == 0;
 
                     Result result = null;

@@ -32,7 +32,7 @@
         }
 
         public void InvokeScrollEvent(MouseWheelEventArgs e) {
-            MouseWheelEventArgs eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta) {
+            MouseWheelEventArgs eventArg = new(e.MouseDevice, e.Timestamp, e.Delta) {
                 RoutedEvent = MouseWheelEvent,
                 Source = e.Source
             };
@@ -43,7 +43,7 @@
         }
 
         private async void File_Drop(object sender, DragEventArgs e) {
-            List<string> errorMessages = new List<string>();
+            List<string> errorMessages = new();
             string[] droppedFilePathnames = (string[]) e.Data.GetData(DataFormats.FileDrop);
 
             string errorParsingSettings = Globals.SetAllEncodersFromSettings();
@@ -56,7 +56,7 @@
 
             await Task.Run(() => {
                 foreach (string pathname in droppedFilePathnames) {
-                    FileInfo inputInfo = new FileInfo(pathname);
+                    FileInfo inputInfo = new(pathname);
 
                     if (!Globals.ValidExtensions.Contains(inputInfo.Extension.ToLower())) {
                         errorMessages.Add($"{pathname} has an invalid extension.");
@@ -68,7 +68,7 @@
                         continue;
                     }
 
-                    BitmapImage preview = new BitmapImage();
+                    BitmapImage preview = new();
 
                     try {
                         using Stream fs = new FileStream(pathname, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
