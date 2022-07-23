@@ -5,22 +5,12 @@ using System.Drawing.Imaging;
 
 namespace Imazen.WebP {
     public class SimpleDecoder {
-        public static string GetDecoderVersion() {
-            uint v = (uint) NativeMethods.WebPGetDecoderVersion();
-            var revision = v % 256;
-            var minor = (v >> 8) % 256;
-            var major = (v >> 16) % 256;
-            return major + "." + minor + "." + revision;
-        }
-
-        public SimpleDecoder() {
-        }
-
         public static unsafe Bitmap DecodeFromBytes(byte[] data, long length) {
             fixed (byte* dataptr = data) {
                 return DecodeFromPointer((IntPtr) dataptr, length);
             }
         }
+
         public static Bitmap DecodeFromPointer(IntPtr data, long length) {
             int w = 0, h = 0;
             //Validate header and determine size
@@ -32,7 +22,7 @@ namespace Imazen.WebP {
             BitmapData bd = null;
             try {
                 //Allocate canvas
-                b = new Bitmap(w, h, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                b = new Bitmap(w, h, PixelFormat.Format32bppArgb);
                 //Lock surface for writing
                 bd = b.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
                 //Decode to surface
@@ -50,6 +40,5 @@ namespace Imazen.WebP {
             }
             return b;
         }
-
     }
 }
