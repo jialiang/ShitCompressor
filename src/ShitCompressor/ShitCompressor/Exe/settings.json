@@ -9,7 +9,7 @@
       "Filename": "guetzli.exe",
       "DefaultQuality": 95,
       "DefaultEnabled": false,
-      "Input": [ "jpg", "png" ],
+      "Input": ["jpg", "png"],
       "Output": "jpg",
       "Special": false
     },
@@ -19,17 +19,17 @@
       "Filename": "cjpeg.bat",
       "DefaultQuality": 95,
       "DefaultEnabled": true,
-      "Input": [ "jpg", "png" ],
+      "Input": ["jpg", "png"],
       "Output": "jpg",
       "Special": false
     },
     {
       "Name": "jpegtran",
       "Signature": "{InputP} {OutputP}",
-      "Filename": "jpegtran.bat",
+      "Filename": "jpegtran.exe",
       "DefaultQuality": 0,
       "DefaultEnabled": true,
-      "Input": [ "jpg" ],
+      "Input": ["jpg"],
       "Output": "jpg",
       "Special": false
     },
@@ -39,7 +39,7 @@
       "Filename": "jpegoptim.bat",
       "DefaultQuality": 95,
       "DefaultEnabled": true,
-      "Input": [ "jpg" ],
+      "Input": ["jpg"],
       "Output": "jpg",
       "Special": false
     },
@@ -49,7 +49,7 @@
       "Filename": "cwebp.exe",
       "DefaultQuality": 95,
       "DefaultEnabled": true,
-      "Input": [ "jpg", "png" ],
+      "Input": ["jpg", "png"],
       "Output": "webp",
       "Special": true
     }
