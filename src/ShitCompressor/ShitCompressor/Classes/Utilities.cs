@@ -37,6 +37,7 @@
             process.StartInfo.FileName = filename;
             process.StartInfo.Arguments = arguments;
             process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
 
             process.EnableRaisingEvents = true;
 

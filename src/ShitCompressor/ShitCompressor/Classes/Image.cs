@@ -72,23 +72,51 @@
                     Replace("{InputP}", $"\"{inputPathname}\"").
                     Replace("{OutputP}", $"\"{outputPathname}\"").
                     Replace("{MapP}", $"\"{mapPathname}\"");
+                string errorMessage = "";
+
+                CountdownEvent countdownEvent = new(2);
 
                 using Process process = Utilities.ProcessCreator(path, arguments);
+
                 process.OutputDataReceived += (sender, e) => {
                     if (string.IsNullOrEmpty(e.Data)) {
+                        countdownEvent.Signal();
                         return;
                     }
 
                     try {
                         qualityScores[qualityCalculator.Name] = double.Parse(e.Data);
                     } catch (Exception exception) {
-                        Debug.WriteLine($"Error parsing score: {exception.Message}");
+                        errorMessage += $"Error parsing score: {exception.Message}\n";
                     }
+                };
+
+                process.ErrorDataReceived += (sender, e) =>
+                {
+                    if (string.IsNullOrEmpty(e.Data))
+                    {
+                        countdownEvent.Signal();
+                        return;
+                    }
+
+                    errorMessage += e.Data + '\n';
                 };
 
                 process.Start();
                 process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
                 process.WaitForExit();
+                countdownEvent.Wait();
+
+                if (errorMessage != "")
+                {
+                    MessageBox.Show(
+                        errorMessage,
+                        $"Error calculating {qualityCalculator.Name} score",
+                        MessageBoxButton.OK, 
+                        MessageBoxImage.Error
+                    );
+                }
             }
 
             return qualityScores;
