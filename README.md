@@ -10,12 +10,13 @@ Image compressor with graphical user interface. Does:
 
 - PNG to JPG (lossy)
 - JPG to JPG (lossy or lossless)
-- PNG/JPG to WEBP (lossy, no alpha).
+- PNG/JPG to WEBP (lossy).
+- PNG/JPG to AVIF (lossy)
 
 ## Features
 
-- Generates [SSIMULACRA](https://github.com/cloudinary/ssimulacra) and [Butteraugli](https://github.com/google/butteraugli) scores along with a SSIM Map and Edge Artifact map so that you know how shitty your compressed image is compared to the original.
-- Contains 5 encoders (Guetzli, MozJpeg (lossy and lossless), JpegOptim and LibWebP) with the ability to preview and choose which output to save.
+- Generates [SSIMULACRA](https://github.com/cloudinary/ssimulacra) and [Butteraugli](https://github.com/google/butteraugli) scores along with a SSIM Map and Edge Artifact map so that you know how shitty your compressed image is compared to the original (Not available for avif output at the moment).
+- Contains 6 encoders (Guetzli, MozJpeg (lossy and lossless), JpegOptim, LibWebP and LibAvif) with the ability to preview and choose which output to save.
 - Ability to enable encoders and adjust quality setting on a per-image level.
 - Decoupled architecture let's you easily update encoders by replacing existing binaries without recompiling the entire program.
 - Exposed internals let's you set configure all flags and arguments that each encoder offers.
@@ -63,6 +64,7 @@ x64 Windows 10 Version 1607 and above.
 - **Ssimulacra** - version 30 Jun 2020, built from [source](https://gist.github.com/jialiang/c614b72d7b67ae93bcfe437f1b481a52) using Visual Studio 2019, modified from [original](https://github.com/cloudinary/ssimulacra) to accept a 3rd argument as SSIM and Edge Diff map prefix.
 - **Butteraugli** - version 20 March 2019, built from [source](https://github.com/google/butteraugli) using Visual Studio 2019.
 - **JpegTran** - version 12 Januarary 2020, [binaries](https://jpegclub.org/jpegtran/) released by the Independent JPEG Group.
+- **LibAvif** - version 0.10.0 (using AOM 3.3.0), built from [source](https://github.com/AOMediaCodec/libavif) using CMake and Ninja.
 
 Dependencies of binaries downloaded and built using Vcpkg.
 
