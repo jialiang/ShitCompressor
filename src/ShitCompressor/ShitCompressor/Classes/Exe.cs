@@ -103,7 +103,8 @@ namespace ShitCompressor.utilities {
         ) {
         }
 
-        public void IncreaseQuality() {
+        public void IncreaseQuality()
+        {
             Quality = Math.Min(Quality + 1, QualityMax);
             OnPropertyChanged("Quality");
         }
