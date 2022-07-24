@@ -51,7 +51,9 @@
                         (string) setting.Output,
                         (int) setting.DefaultQuality,
                         (bool) setting.DefaultEnabled,
-                        (bool) setting.Special
+                        (bool) setting.Special,
+                        (int) setting.QualityMin,
+                        (int) setting.QualityMax
                     ));
                 }
 

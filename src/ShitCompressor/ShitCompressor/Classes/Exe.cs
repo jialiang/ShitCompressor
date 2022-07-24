@@ -25,9 +25,6 @@ namespace ShitCompressor.utilities {
     }
 
     public class EncoderExe : Exe, INotifyPropertyChanged {
-        public static readonly int QualityMax = 100;
-        public static readonly int QualityMin = 50;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public int DefaultQuality {
@@ -50,6 +47,16 @@ namespace ShitCompressor.utilities {
             get; set;
         }
 
+        public int QualityMin
+        {
+            get; set;
+        }
+
+        public int QualityMax
+        {
+            get; set;
+        }
+
         public bool IsEnabled {
             get; set;
         }
@@ -66,7 +73,9 @@ namespace ShitCompressor.utilities {
             string output,
             int defaultQuality = 0,
             bool defaultEnabled = true,
-            bool isSpecial = false
+            bool isSpecial = false,
+            int qualityMin = 50,
+            int qualityMax = 100
         ) : base(name, signature, filename) {
             Input = input;
             Output = output;
@@ -75,6 +84,8 @@ namespace ShitCompressor.utilities {
             IsSpecial = isSpecial;
 
             Quality = defaultQuality;
+            QualityMin = qualityMin;
+            QualityMax = qualityMax;
             IsEnabled = defaultEnabled;
         }
 
@@ -86,7 +97,9 @@ namespace ShitCompressor.utilities {
             exe.Output,
             exe.Quality,
             exe.IsEnabled,
-            exe.IsSpecial
+            exe.IsSpecial,
+            exe.QualityMin,
+            exe.QualityMax
         ) {
         }
 
