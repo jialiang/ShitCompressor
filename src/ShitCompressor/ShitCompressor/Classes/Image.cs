@@ -40,7 +40,7 @@
             OriginalSizeText = Utilities.ByteToKbString(InputInfo.Length);
             PreviewImage = preview;
 
-            List<EncoderExe> activeEncoderList = Globals.AllEncodersFromSettings ?? Globals.AllEncoders;
+            List<EncoderExe> activeEncoderList = Globals.AllEncodersFromSettings;
 
             foreach (EncoderExe encoder in activeEncoderList) {
                 string isFileSupported = encoder.Input.FirstOrDefault(input => $".{input}" == InputInfo.Extension.ToLower());

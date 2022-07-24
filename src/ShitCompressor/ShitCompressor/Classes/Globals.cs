@@ -13,53 +13,6 @@
 
         public static string OutputSuffix { get; private set; } = "(optimized)";
 
-        public static readonly List<EncoderExe> AllEncoders = new()
-        {
-            new EncoderExe(
-                "guetzli",
-                "--quality {Quality} {InputP} {OutputP}",
-                "guetzli.exe",
-                new List<string>(){ "jpg", "png" },
-                "jpg",
-                95,
-                false
-            ),
-            new EncoderExe(
-                "mozjpeg",
-                "{InputP} {OutputP} {Quality}",
-                "cjpeg.bat",
-                new List<string>(){ "jpg", "png" },
-                "jpg",
-                95
-            ),
-            new EncoderExe(
-                "jpegtran",
-                "{InputP} {OutputP}",
-                "jpegtran.bat",
-                new List<string>(){ "jpg" },
-                "jpg",
-                0
-            ),
-            new EncoderExe(
-                "jpegoptim",
-                "{InputP} {OutputP} --strip-all --force --max={Quality}",
-                "imageoptim.bat",
-                new List<string>(){ "jpg" },
-                "jpg",
-                95
-            ),
-            new EncoderExe(
-                "webp",
-                "-q {Quality} -noalpha {InputP} -o {OutputP}",
-                "cwebp.exe",
-                new List<string>(){ "jpg", "png" },
-                "webp",
-                95,
-                true,
-                true
-            )
-        };
-
         public static List<EncoderExe> AllEncodersFromSettings { get; private set; } = null;
 
         public static readonly List<Exe> qualityCalculators = new()
@@ -105,7 +58,7 @@
                 AllEncodersFromSettings = encoderList;
             } catch (Exception exception) {
                 AllEncodersFromSettings = null;
-                return $"Error parsing settings.json. Application defaults will be used.\n\n{exception.Message}";
+                return $"Error parsing settings.json.\n\n{exception.Message}";
             }
 
             return null;

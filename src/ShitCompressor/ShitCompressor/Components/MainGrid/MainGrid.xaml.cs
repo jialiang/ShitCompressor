@@ -52,53 +52,55 @@
                 errorMessages.Add(errorParsingSettings);
             }
 
-            MainWindow.ActiveWindow.ShowLoading();
+            if (errorMessages.Count == 0) {
+                MainWindow.ActiveWindow.ShowLoading();
 
-            await Task.Run(() => {
-                foreach (string pathname in droppedFilePathnames) {
-                    FileInfo inputInfo = new(pathname);
+                await Task.Run(() => {
+                    foreach (string pathname in droppedFilePathnames) {
+                        FileInfo inputInfo = new(pathname);
 
-                    if (!Globals.ValidExtensions.Contains(inputInfo.Extension.ToLower())) {
-                        errorMessages.Add($"{pathname} has an invalid extension.");
-                        continue;
+                        if (!Globals.ValidExtensions.Contains(inputInfo.Extension.ToLower())) {
+                            errorMessages.Add($"{pathname} has an invalid extension.");
+                            continue;
+                        }
+
+                        if (ImageList.ToList().SingleOrDefault(image => image.InputInfo.FullName == pathname) != null) {
+                            errorMessages.Add($"{pathname} is a duplicate");
+                            continue;
+                        }
+
+                        BitmapImage preview = new();
+
+                        try {
+                            using Stream fs = new FileStream(pathname, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+                            preview.BeginInit();
+                            preview.StreamSource = fs;
+                            preview.DecodePixelWidth = 240;
+                            preview.CacheOption = BitmapCacheOption.OnLoad;
+                            preview.EndInit();
+                            preview.Freeze();
+                        } catch (Exception exception) {
+                            errorMessages.Add($"Error with readding {pathname} as image file: {exception.Message}");
+                            continue;
+                        }
+
+                        Application.Current.Dispatcher.Invoke(
+                            new Action(() => {
+                                ImageList.Add(new CImage(inputInfo, preview));
+                                scrollViewer.ScrollToBottom();
+                            })
+                        );
+
+                        string tempFolder = Path.Combine(Path.GetDirectoryName(pathname), Globals.TempStorageFolder);
+
+                        if (MainWindow.ActiveWindow.PathsToCleanupOnClose.Find((path) => path.Equals(tempFolder)) == null) {
+                            MainWindow.ActiveWindow.PathsToCleanupOnClose.Add(tempFolder);
+                        }
                     }
+                });
 
-                    if (ImageList.ToList().SingleOrDefault(image => image.InputInfo.FullName == pathname) != null) {
-                        errorMessages.Add($"{pathname} is a duplicate");
-                        continue;
-                    }
-
-                    BitmapImage preview = new();
-
-                    try {
-                        using Stream fs = new FileStream(pathname, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
-                        preview.BeginInit();
-                        preview.StreamSource = fs;
-                        preview.DecodePixelWidth = 240;
-                        preview.CacheOption = BitmapCacheOption.OnLoad;
-                        preview.EndInit();
-                        preview.Freeze();
-                    } catch (Exception exception) {
-                        errorMessages.Add($"Error with readding {pathname} as image file: {exception.Message}");
-                        continue;
-                    }
-
-                    Application.Current.Dispatcher.Invoke(
-                        new Action(() => {
-                            ImageList.Add(new CImage(inputInfo, preview));
-                            scrollViewer.ScrollToBottom();
-                        })
-                    );
-
-                    string tempFolder = Path.Combine(Path.GetDirectoryName(pathname), Globals.TempStorageFolder);
-
-                    if (MainWindow.ActiveWindow.PathsToCleanupOnClose.Find((path) => path.Equals(tempFolder)) == null) {
-                        MainWindow.ActiveWindow.PathsToCleanupOnClose.Add(tempFolder);
-                    }
-                }
-            });
-
-            MainWindow.ActiveWindow.HideLoading();
+                MainWindow.ActiveWindow.HideLoading();
+            }
 
             if (errorMessages.Count != 0) {
                 Utilities.Alert(string.Join("\n\n", errorMessages.ToArray()));
