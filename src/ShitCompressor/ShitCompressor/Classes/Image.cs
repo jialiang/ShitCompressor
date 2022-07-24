@@ -222,7 +222,10 @@
 
                             cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                            qualityScores = GetQualityScores(normalizedInputPath, normalizedOutputPath, outputPathname);
+                            if (outputInfo.Extension != ".avif")
+                            {
+                                qualityScores = GetQualityScores(normalizedInputPath, normalizedOutputPath, outputPathname);
+                            }
                         }
 
                         int timeElapsed = (int) (DateTime.Now - startTime).TotalSeconds;

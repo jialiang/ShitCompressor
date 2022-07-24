@@ -62,6 +62,18 @@
       "Input": [ "jpg", "png" ],
       "Output": "webp",
       "Special": true
+    },
+    {
+      "Name": "avif",
+      "Signature": "--min 0 --max 63 -a end-usage=q -a cq-level={Quality} -a tune=ssim {InputP} {OutputP}",
+      "Filename": "avifenc.exe",
+      "DefaultQuality": 30,
+      "QualityMin": 1,
+      "QualityMax": 63,
+      "DefaultEnabled": true,
+      "Input": [ "jpg", "png" ],
+      "Output": "avif",
+      "Special": true
     }
   ]
 }
