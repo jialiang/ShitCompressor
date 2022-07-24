@@ -110,12 +110,7 @@
 
                 if (errorMessage != "")
                 {
-                    MessageBox.Show(
-                        errorMessage,
-                        $"Error calculating {qualityCalculator.Name} score",
-                        MessageBoxButton.OK, 
-                        MessageBoxImage.Error
-                    );
+                    Utilities.Alert(errorMessage, $"Error calculating {qualityCalculator.Name} score");
                 }
             }
 
