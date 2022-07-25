@@ -18,7 +18,7 @@
         public static readonly List<Exe> qualityCalculators = new()
         {
             new Exe("butteraugli", "{InputP} {OutputP}", "butteraugli.exe"),
-            new Exe("ssimulacra", "{InputP} {OutputP} {MapP}", "ssimulacra.exe")
+            new Exe("ssimulacra", "{InputP} {OutputP} {MapP}", "ssimx.exe")
         };
 
         public static bool UseButteraugli { get; private set; } = false;

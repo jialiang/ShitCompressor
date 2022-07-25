@@ -67,7 +67,7 @@
       "Name": "avif",
       "Signature": "--min 0 --max 63 -a end-usage=q -a cq-level={Quality} -a tune=ssim {InputP} {OutputP}",
       "Filename": "avifenc.exe",
-      "DefaultQuality": 30,
+      "DefaultQuality": 5,
       "QualityMin": 1,
       "QualityMax": 63,
       "DefaultEnabled": true,

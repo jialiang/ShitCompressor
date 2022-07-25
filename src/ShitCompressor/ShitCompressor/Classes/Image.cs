@@ -232,26 +232,7 @@
 
                             cancellationTokenSource.Token.ThrowIfCancellationRequested();
 
-                            if (outputInfo.Extension == ".webp")
-                            {
-                                byte[] outputBytes = File.ReadAllBytes(outputInfo.FullName);
-
-                                using Bitmap normalizedOutputBitmap = Utilities.RemoveAlpha(
-                                    Imazen.WebP.SimpleDecoder.DecodeFromBytes(outputBytes, outputBytes.Length)
-                                );
-                                normalizedOutputPath = Path.Combine(
-                                    tempOutputDirectory, Utilities.ChangeExtension(outputFilename, "png")
-                                );
-                                normalizedOutputBitmap.Save(normalizedOutputPath, ImageFormat.Png);
-                                filesToCleanup.Add(normalizedOutputPath);
-                            }
-
-                            cancellationTokenSource.Token.ThrowIfCancellationRequested();
-
-                            if (outputInfo.Extension != ".avif")
-                            {
-                                qualityScores = GetQualityScores(normalizedInputPath, normalizedOutputPath, outputPathname);
-                            }
+                            qualityScores = GetQualityScores(normalizedInputPath, normalizedOutputPath, outputPathname);
                         }
 
                         int timeElapsed = (int)(DateTime.Now - startTime).TotalSeconds;
