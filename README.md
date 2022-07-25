@@ -15,7 +15,7 @@ Image compressor with graphical user interface. Does:
 
 ## Features
 
-- Generates [SSIMULACRA](https://github.com/cloudinary/ssimulacra) and [Butteraugli](https://github.com/google/butteraugli) scores along with a SSIM Map and Edge Artifact map so that you know how shitty your compressed image is compared to the original (Not available for avif output at the moment).
+- Generates [SSIMULACRA](https://github.com/cloudinary/ssimulacra) and [Butteraugli](https://github.com/google/butteraugli) scores along with a SSIM Map and Edge Artifact map so that you know how shitty your compressed image is compared to the original (Butteraugli only works for png and jpg output).
 - Contains 6 encoders (Guetzli, MozJpeg (lossy and lossless), JpegOptim, LibWebP and LibAvif) with the ability to preview and choose which output to save.
 - Ability to enable encoders and adjust quality setting on a per-image level.
 - Decoupled architecture let's you easily update encoders by replacing existing binaries without recompiling the entire program.
@@ -51,9 +51,9 @@ x64 Windows 10 Version 1607 and above.
 
 ## Which Version to Download?
 
-**Self-Contained** - Larger download (~50MB) and uncompressed size (~165MB), portable since everything you need are bundled together.
+**Self-Contained** - Larger download (~67MB) and uncompressed size (~173MB), portable since everything you need are bundled together.
 
-**Framework Dependent** - Smaller download (~11MB) and uncompressed size (~30MB), but requires the [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/current/runtime) to be installed on your computer to work.
+**Framework Dependent** - Smaller download (~13MB) and uncompressed size (~36MB), but requires the [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/current/runtime) to be installed on your computer to work.
 
 ## Source of Binaries Used
 
@@ -61,7 +61,7 @@ x64 Windows 10 Version 1607 and above.
 - **MozJpeg** - version 4.0.0, built from [source](https://github.com/mozilla/mozjpeg/releases/tag/v4.0.0) using CMake and Visual Studio 2019.
 - **JpegOptim** - version 1.4.6 built from [source](https://github.com/tjko/jpegoptim/releases/tag/RELEASE.1.4.6) using CMake and Visual Studio 2019.
 - **LibWebP** - version 1.2.3, [binaries](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/index.html) released by Google.
-- **Ssimulacra** - version 30 Jun 2020, built from [source](https://gist.github.com/jialiang/c614b72d7b67ae93bcfe437f1b481a52) using Visual Studio 2019, modified from [original](https://github.com/cloudinary/ssimulacra) to accept a 3rd argument as SSIM and Edge Diff map prefix.
+- **SSIM-X** - version v1.0.0, built from [source](https://github.com/jialiang/SSIM-X) using Visual Studio 2019.
 - **Butteraugli** - version 20 March 2019, built from [source](https://github.com/google/butteraugli) using Visual Studio 2019.
 - **JpegTran** - version 12 Januarary 2020, [binaries](https://jpegclub.org/jpegtran/) released by the Independent JPEG Group.
 - **LibAvif** - version 0.10.0 (using AOM 3.3.0), built from [source](https://github.com/AOMediaCodec/libavif) using CMake and Ninja.
