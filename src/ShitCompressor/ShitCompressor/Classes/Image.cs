@@ -71,9 +71,13 @@
             {
                 qualityScores.Add(qualityCalculator.Name, -1.0);
 
-                if (qualityCalculator.Name == "butteraugli" && !Globals.UseButteraugli)
+                if (qualityCalculator.Name == "butteraugli")
                 {
-                    continue;
+                    if (!Globals.UseButteraugli) continue;
+
+                    string extension = Path.GetExtension(mapPathname);
+
+                    if (extension != ".jpg" && extension != ".png") continue;
                 }
 
                 string path = Path.Combine(Directory.GetCurrentDirectory(), "exe", qualityCalculator.Filename);

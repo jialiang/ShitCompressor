@@ -52,10 +52,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\libwebp-net-core\libwebp-net-core\libwebp-net-core.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Resource Include="Fonts\Roboto-Medium.ttf">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Resource>
