@@ -145,10 +145,4 @@
 		</Resource>
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="webp.dll">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
 </Project>

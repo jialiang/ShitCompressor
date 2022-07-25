@@ -16,7 +16,7 @@ namespace Imazen.WebP.Extern
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        [DllImport("webp", EntryPoint = "WebPGetInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("exe/webp", EntryPoint = "WebPGetInfo", CallingConvention = CallingConvention.Cdecl)]
         public static extern int WebPGetInfo([In()] IntPtr data, UIntPtr data_size, ref int width, ref int height);
 
         /// Return Type: uint8_t*
@@ -25,7 +25,7 @@ namespace Imazen.WebP.Extern
         ///output_buffer: uint8_t*
         ///output_buffer_size: size_t->unsigned int
         ///output_stride: int
-        [DllImport("webp", EntryPoint = "WebPDecodeBGRAInto", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("exe/webp", EntryPoint = "WebPDecodeBGRAInto", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr WebPDecodeBGRAInto([In()] IntPtr data, UIntPtr data_size, IntPtr output_buffer, UIntPtr output_buffer_size, int output_stride);
     }
 }
