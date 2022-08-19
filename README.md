@@ -64,7 +64,7 @@ x64 Windows 10 Version 1607 and above.
 - **SSIM-X** - version v1.0.0, built from [source](https://github.com/jialiang/SSIM-X) using Visual Studio 2019.
 - **Butteraugli** - version 20 March 2019, built from [source](https://github.com/google/butteraugli) using Visual Studio 2019.
 - **JpegTran** - version 12 Januarary 2020, [binaries](https://jpegclub.org/jpegtran/) released by the Independent JPEG Group.
-- **LibAvif** - version 0.10.0 (using AOM 3.3.0), built from [source](https://github.com/AOMediaCodec/libavif) using CMake and Ninja.
+- **LibAvif** - version 0.10.1 (using AOM 3.3.0), built from [source](https://github.com/AOMediaCodec/libavif) using CMake and Ninja.
 
 Dependencies of binaries downloaded and built using Vcpkg.
 
