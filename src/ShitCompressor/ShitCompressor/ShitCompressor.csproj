@@ -112,13 +112,13 @@
 	  <None Update="Exe\lzma.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="Exe\opencv_core.dll">
+	  <None Update="Exe\opencv_core4.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="Exe\opencv_imgcodecs.dll">
+	  <None Update="Exe\opencv_imgcodecs4.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="Exe\opencv_imgproc.dll">
+	  <None Update="Exe\opencv_imgproc4.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Exe\ssimx.exe">
