@@ -68,10 +68,6 @@ x64 Windows 10 Version 1607 and above.
 
 Dependencies of binaries downloaded and built using Vcpkg.
 
-## Credits
-
-The dependency libwebp-net-core is my own .NET 5.0 port of Imazen's [libwebp-net](https://github.com/imazen/libwebp-net).
-
 ## Known Issues
 
 - Fails with input filepaths containing non-ASCII characters. All the binaries used were built with C++ which doesn't natively handle arguments containing non-ASCII characters.
