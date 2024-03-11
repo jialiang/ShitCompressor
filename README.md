@@ -49,6 +49,12 @@ x64 Windows 10 Version 1607 and above.
 
 ## Which Version to Download?
 
+### For Release 1.1.4 onwards:
+
+Only 1 self-contained x64-Windows binary is provided.
+
+### For Release 1.1.3 and below:
+
 **Self-Contained** - Larger download (~67MB) and uncompressed size (~173MB), portable since everything you need are bundled together.
 
 **Framework Dependent** - Smaller download (~13MB) and uncompressed size (~36MB), but requires the [.NET 5.0 Runtime](https://dotnet.microsoft.com/download/dotnet/current/runtime) to be installed on your computer to work.
