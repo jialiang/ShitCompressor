@@ -1,4 +1,5 @@
-﻿namespace ShitCompressor.Classes {
+﻿namespace ShitCompressor.Classes
+{
     using ShitCompressor.utilities;
     using System;
     using System.Collections.Generic;
@@ -8,7 +9,8 @@
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    public class Result : INotifyPropertyChanged {
+    public class Result : INotifyPropertyChanged
+    {
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsPreferred { get; set; } = false;
@@ -52,7 +54,8 @@
             Dictionary<string, double> qualityScores,
             int timeElapsed,
             string startTimeText
-        ) {
+        )
+        {
             EncoderName = encoderName;
             EncoderOutputFormat = encoderOutputFormat;
             IsSpecialEncoder = isSpecialEncoder;
@@ -62,7 +65,8 @@
             TimeElapsed = timeElapsed;
             StartTimeText = startTimeText;
 
-            if (!OutputInfo.Exists || OutputInfo.Length == 0) {
+            if (!OutputInfo.Exists || OutputInfo.Length == 0)
+            {
                 return;
             }
 
@@ -70,19 +74,25 @@
 
             long originalSize = InputInfo.Length;
             long sizeDifference = OutputInfo.Length - originalSize;
-            string sizeDifferencePercent = Math.Round((decimal) sizeDifference / (decimal) originalSize * 100, 0).ToString("+#;-#;0");
+            string sizeDifferencePercent = Math.Round((decimal)sizeDifference / (decimal)originalSize * 100, 0).ToString("+#;-#;0");
 
             SavingsText = $"{Utilities.ByteToKbString(sizeDifference)} ({sizeDifferencePercent}%)";
 
-            if (qualityScores != null && qualityScores["ssimulacra"] != -1.0000) {
+            if (qualityScores != null && qualityScores["ssimulacra"] != -1.0000)
+            {
                 Ssimulacra = Math.Round(qualityScores["ssimulacra"], 4).ToString("0.0000", CultureInfo.InvariantCulture);
-            } else {
+            }
+            else
+            {
                 Ssimulacra = "-";
             }
 
-            if (qualityScores != null && qualityScores["butteraugli"] != -1.0000) {
+            if (qualityScores != null && qualityScores["butteraugli"] != -1.0000)
+            {
                 Butteraugli = Math.Round(qualityScores["butteraugli"], 4).ToString("0.0000", CultureInfo.InvariantCulture);
-            } else {
+            }
+            else
+            {
                 Butteraugli = "-";
             }
 
@@ -90,11 +100,13 @@
             Status = "OK";
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null) {
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        public void SetPreferred() {
+        public void SetPreferred()
+        {
             IsPreferred = true;
 
             string parentDir = InputInfo.DirectoryName;
@@ -109,35 +121,48 @@
             OnPropertyChanged("IsPreferred");
         }
 
-        public void OpenOptimizedImage() {
-            if (File.Exists(OutputInfo.FullName)) {
+        public void OpenOptimizedImage()
+        {
+            if (File.Exists(OutputInfo.FullName))
+            {
                 Process.Start("explorer", $"\"{OutputInfo.FullName}\"");
-            } else {
+            }
+            else
+            {
                 Utilities.Alert($"{OutputInfo.FullName} is missing");
             }
         }
 
-        public void OpenSsimMap() {
+        public void OpenSsimMap()
+        {
             string pathname = $"{OutputInfo.FullName}.ssim.png";
 
-            if (File.Exists(pathname)) {
+            if (File.Exists(pathname))
+            {
                 Process.Start("explorer", pathname);
-            } else {
+            }
+            else
+            {
                 Utilities.Alert($"{pathname} is missing.");
             }
         }
 
-        public void OpenEdgeDiffMap() {
+        public void OpenEdgeDiffMap()
+        {
             string pathname = $"{OutputInfo.FullName}.edgediff.png";
 
-            if (File.Exists(pathname)) {
+            if (File.Exists(pathname))
+            {
                 Process.Start("explorer", pathname);
-            } else {
+            }
+            else
+            {
                 Utilities.Alert($"{pathname} is missing.");
             }
         }
 
-        public void UpdateTimings(int timeElapsed, string startTimeText) {
+        public void UpdateTimings(int timeElapsed, string startTimeText)
+        {
             TimeElapsed = timeElapsed;
             StartTimeText = startTimeText;
 

@@ -1,4 +1,5 @@
-﻿namespace ShitCompressor.Classes {
+﻿namespace ShitCompressor.Classes
+{
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -15,20 +16,25 @@
     using Color = System.Drawing.Color;
     using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
-    internal static class Utilities {
-        public static string ByteToKbString(long b, int decimals = 0) {
-            return Math.Round((decimal) (b / 1024), decimals) + " kB";
+    internal static class Utilities
+    {
+        public static string ByteToKbString(long b, int decimals = 0)
+        {
+            return Math.Round((decimal)(b / 1024), decimals) + " kB";
         }
 
-        public static string AppendToFilename(string filename, string append) {
+        public static string AppendToFilename(string filename, string append)
+        {
             return string.Join(".", filename.Split('.').Select((part, index) => index == 0 ? $"{part} {append}" : part));
         }
 
-        public static string ChangeExtension(string filename, string newExtension) {
+        public static string ChangeExtension(string filename, string newExtension)
+        {
             return string.Join(".", filename.Split('.').Reverse().Skip(1).Reverse()) + "." + newExtension;
         }
 
-        public static Process ProcessCreator(string filename, string arguments) {
+        public static Process ProcessCreator(string filename, string arguments)
+        {
             Process process = new();
 
             process.StartInfo.CreateNoWindow = true;
@@ -44,7 +50,8 @@
             return process;
         }
 
-        public static List<Process> GetAllChildProcesses(UInt32 parentProcessId) {
+        public static List<Process> GetAllChildProcesses(UInt32 parentProcessId)
+        {
             ManagementObjectSearcher searcher = new(
                 "SELECT * " +
                 "FROM Win32_Process " +
@@ -53,16 +60,22 @@
 
             List<Process> childProcessList = new();
 
-            if (collection.Count > 0) {
-                foreach (var item in collection) {
-                    uint childProcessId = (uint) item["ProcessId"];
-                    if ((int) childProcessId != Environment.ProcessId) {
+            if (collection.Count > 0)
+            {
+                foreach (var item in collection)
+                {
+                    uint childProcessId = (uint)item["ProcessId"];
+                    if ((int)childProcessId != Environment.ProcessId)
+                    {
                         childProcessList.AddRange(GetAllChildProcesses(childProcessId));
 
-                        try {
-                            Process childProcess = Process.GetProcessById((int) childProcessId);
+                        try
+                        {
+                            Process childProcess = Process.GetProcessById((int)childProcessId);
                             childProcessList.Add(childProcess);
-                        } catch (Exception exception) {
+                        }
+                        catch (Exception exception)
+                        {
                             Debug.WriteLine(exception.Message);
                         }
                     }
@@ -72,7 +85,8 @@
             return childProcessList;
         }
 
-        public static Bitmap RemoveAlpha(Bitmap bitmap) {
+        public static Bitmap RemoveAlpha(Bitmap bitmap)
+        {
             Bitmap result = new(bitmap.Size.Width, bitmap.Size.Height, PixelFormat.Format24bppRgb);
             Graphics graphics = Graphics.FromImage(result);
 
@@ -83,25 +97,32 @@
             return result;
         }
 
-        public static string CheckMD5(string filename) {
+        public static string CheckMD5(string filename)
+        {
             using MD5 md5 = MD5.Create();
             using FileStream stream = File.OpenRead(filename);
             return Encoding.Default.GetString(md5.ComputeHash(stream));
         }
 
-        public static ScrollViewer GetScrollViewer(UIElement element) {
+        public static ScrollViewer GetScrollViewer(UIElement element)
+        {
             ScrollViewer retour = null;
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element) && retour == null; i++) {
-                if (VisualTreeHelper.GetChild(element, i) is ScrollViewer viewer) {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(element) && retour == null; i++)
+            {
+                if (VisualTreeHelper.GetChild(element, i) is ScrollViewer viewer)
+                {
                     retour = viewer;
-                } else {
+                }
+                else
+                {
                     retour = GetScrollViewer(VisualTreeHelper.GetChild(element, i) as UIElement);
                 }
             }
             return retour;
         }
 
-        public static void Alert(string message, string title = "Error") {
+        public static void Alert(string message, string title = "Error")
+        {
             MessageBox.Show(
                 message,
                 title,

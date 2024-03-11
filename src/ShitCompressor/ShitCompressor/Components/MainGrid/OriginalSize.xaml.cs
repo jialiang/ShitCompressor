@@ -1,8 +1,11 @@
-﻿namespace ShitCompressor.Components.MainGrid {
+﻿namespace ShitCompressor.Components.MainGrid
+{
     using System.Windows.Controls;
 
-    public partial class OriginalSize : UserControl {
-        public OriginalSize() {
+    public partial class OriginalSize : UserControl
+    {
+        public OriginalSize()
+        {
             InitializeComponent();
         }
     }

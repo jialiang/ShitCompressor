@@ -3,47 +3,59 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ShitCompressor.utilities {
-    public class Exe {
-        public string Name {
+namespace ShitCompressor.utilities
+{
+    public class Exe
+    {
+        public string Name
+        {
             get; private set;
         }
 
-        public string Signature {
+        public string Signature
+        {
             get; private set;
         }
 
-        public string Filename {
+        public string Filename
+        {
             get; private set;
         }
 
-        public Exe(string name, string signature, string filename) {
+        public Exe(string name, string signature, string filename)
+        {
             Name = name;
             Signature = signature;
             Filename = filename;
         }
     }
 
-    public class EncoderExe : Exe, INotifyPropertyChanged {
+    public class EncoderExe : Exe, INotifyPropertyChanged
+    {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int DefaultQuality {
+        public int DefaultQuality
+        {
             get; private set;
         }
 
-        public bool DefaultEnabled {
+        public bool DefaultEnabled
+        {
             get; private set;
         }
 
-        public List<string> Input {
+        public List<string> Input
+        {
             get; private set;
         }
 
-        public string Output {
+        public string Output
+        {
             get; private set;
         }
 
-        public int Quality {
+        public int Quality
+        {
             get; set;
         }
 
@@ -57,11 +69,13 @@ namespace ShitCompressor.utilities {
             get; set;
         }
 
-        public bool IsEnabled {
+        public bool IsEnabled
+        {
             get; set;
         }
 
-        public bool IsSpecial {
+        public bool IsSpecial
+        {
             get; private set;
         }
 
@@ -76,7 +90,8 @@ namespace ShitCompressor.utilities {
             bool isSpecial = false,
             int qualityMin = 50,
             int qualityMax = 100
-        ) : base(name, signature, filename) {
+        ) : base(name, signature, filename)
+        {
             Input = input;
             Output = output;
             DefaultQuality = defaultQuality;
@@ -100,7 +115,8 @@ namespace ShitCompressor.utilities {
             exe.IsSpecial,
             exe.QualityMin,
             exe.QualityMax
-        ) {
+        )
+        {
         }
 
         public void IncreaseQuality()
@@ -109,12 +125,14 @@ namespace ShitCompressor.utilities {
             OnPropertyChanged("Quality");
         }
 
-        public void DecreaseQuality() {
+        public void DecreaseQuality()
+        {
             Quality = Math.Max(Quality - 1, QualityMin);
             OnPropertyChanged("Quality");
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null) {
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }

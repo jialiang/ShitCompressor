@@ -1,11 +1,13 @@
-﻿namespace ShitCompressor.Classes {
+﻿namespace ShitCompressor.Classes
+{
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    public class SortableBindingList<T> : BindingList<T>, INotifyPropertyChanged {
+    public class SortableBindingList<T> : BindingList<T>, INotifyPropertyChanged
+    {
         private bool isSortedValue;
 
         internal ListSortDirection sortDirectionValue;
@@ -14,91 +16,114 @@
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public SortableBindingList() {
+        public SortableBindingList()
+        {
         }
 
-        public SortableBindingList(IList<T> list) {
-            foreach (object o in list) {
-                Add((T) o);
+        public SortableBindingList(IList<T> list)
+        {
+            foreach (object o in list)
+            {
+                Add((T)o);
             }
         }
 
-        public void Sort(string property, ListSortDirection direction) {
+        public void Sort(string property, ListSortDirection direction)
+        {
             Type t = GetType().GetGenericArguments().Single();
             PropertyDescriptorCollection pdc = TypeDescriptor.GetProperties(t);
 
-            foreach (PropertyDescriptor pd in pdc) {
-                if (pd.Name == property) {
+            foreach (PropertyDescriptor pd in pdc)
+            {
+                if (pd.Name == property)
+                {
                     ApplySortCore(pd, direction);
                     break;
                 }
             }
         }
 
-        protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction) {
+        protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
+        {
             Type interfaceType = prop.PropertyType.GetInterface("IComparable");
 
-            if (interfaceType == null && prop.PropertyType.IsValueType) {
+            if (interfaceType == null && prop.PropertyType.IsValueType)
+            {
                 Type underlyingType = Nullable.GetUnderlyingType(prop.PropertyType);
 
-                if (underlyingType != null) {
+                if (underlyingType != null)
+                {
                     interfaceType = underlyingType.GetInterface("IComparable");
                 }
             }
 
-            if (interfaceType != null) {
+            if (interfaceType != null)
+            {
                 sortPropertyValue = prop;
                 sortDirectionValue = direction;
 
                 IEnumerable<T> query = Items;
 
-                if (direction == ListSortDirection.Ascending) {
+                if (direction == ListSortDirection.Ascending)
+                {
                     query = query.OrderBy(i => prop.GetValue(i).ToString().Length).ThenBy(i => prop.GetValue(i));
-                } else {
+                }
+                else
+                {
                     query = query.OrderByDescending(i => prop.GetValue(i).ToString().Length).ThenByDescending(i => prop.GetValue(i));
                 }
 
                 int newIndex = 0;
-                foreach (object item in query) {
-                    Items[newIndex] = (T) item;
+                foreach (object item in query)
+                {
+                    Items[newIndex] = (T)item;
                     newIndex++;
                 }
 
                 isSortedValue = true;
                 OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
-            } else {
+            }
+            else
+            {
                 throw new NotSupportedException("Cannot sort by " + prop.Name +
                     ". This" + prop.PropertyType.ToString() +
                     " does not implement IComparable");
             }
         }
 
-        protected override PropertyDescriptor SortPropertyCore {
+        protected override PropertyDescriptor SortPropertyCore
+        {
             get { return sortPropertyValue; }
         }
 
-        protected override ListSortDirection SortDirectionCore {
+        protected override ListSortDirection SortDirectionCore
+        {
             get { return sortDirectionValue; }
         }
 
-        protected override bool SupportsSortingCore {
+        protected override bool SupportsSortingCore
+        {
             get { return true; }
         }
 
-        protected override bool IsSortedCore {
+        protected override bool IsSortedCore
+        {
             get { return isSortedValue; }
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null) {
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        protected override void InsertItem(int index, T item) {
+        protected override void InsertItem(int index, T item)
+        {
             base.InsertItem(index, item);
             OnPropertyChanged("Count");
         }
 
-        protected override void RemoveItem(int index) {
+        protected override void RemoveItem(int index)
+        {
             base.RemoveItem(index);
             OnPropertyChanged("Count");
         }
