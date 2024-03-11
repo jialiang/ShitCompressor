@@ -55,7 +55,7 @@ x64 Windows 10 Version 1607 and above.
 
 ## Source of Binaries Used
 
-- **Guetzli** - version 1.0.1, built from source using Visual Studio 2019, modified from [original](https://github.com/google/guetzli/releases/tag/v1.0.1) to allow setting quality < 84.
+- **Guetzli** - version 1.0.1, built from source using Visual Studio 2022, modified from [original](https://github.com/google/guetzli/releases/tag/v1.0.1) to allow setting quality < 84.
 - **MozJpeg** - version 4.1.1, built from [source](https://github.com/mozilla/mozjpeg/releases/tag/v4.1.1) using CMake and Visual Studio 2022.
 - **JpegOptim** - version 1.5.5, [binaries](https://github.com/tjko/jpegoptim/releases/tag/v1.5.5) released by Timo Kokkonen.
 - **LibWebP** - version 1.3.2, [binaries](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/index.html) released by Google.
