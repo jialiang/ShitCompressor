@@ -41,9 +41,7 @@ If the Ssimulacra score is below 0.01 (or so), the distortion is likely to be im
 
 ## Technical
 
-Made with WPF with the .NET 5.0 framework.
-
-Be warned this is my first WPF application, so expect bugs and inefficiencies!
+Made with WPF with the .NET 8.0 framework.
 
 ## Requirements
 
@@ -58,13 +56,13 @@ x64 Windows 10 Version 1607 and above.
 ## Source of Binaries Used
 
 - **Guetzli** - version 1.0.1, built from source using Visual Studio 2019, modified from [original](https://github.com/google/guetzli/releases/tag/v1.0.1) to allow setting quality < 84.
-- **MozJpeg** - version 4.0.0, built from [source](https://github.com/mozilla/mozjpeg/releases/tag/v4.0.0) using CMake and Visual Studio 2019.
-- **JpegOptim** - version 1.4.6 built from [source](https://github.com/tjko/jpegoptim/releases/tag/RELEASE.1.4.6) using CMake and Visual Studio 2019.
-- **LibWebP** - version 1.2.3, [binaries](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/index.html) released by Google.
-- **SSIM-X** - version v1.0.0, built from [source](https://github.com/jialiang/SSIM-X) using Visual Studio 2019.
+- **MozJpeg** - version 4.1.1, built from [source](https://github.com/mozilla/mozjpeg/releases/tag/v4.1.1) using CMake and Visual Studio 2022.
+- **JpegOptim** - version 1.5.5, [binaries](https://github.com/tjko/jpegoptim/releases/tag/v1.5.5) released by Timo Kokkonen.
+- **LibWebP** - version 1.3.2, [binaries](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/index.html) released by Google.
+- **SSIM-X** - version v1.0.2, built from [source](https://github.com/jialiang/SSIM-X) using Visual Studio 2022.
 - **Butteraugli** - version 20 March 2019, built from [source](https://github.com/google/butteraugli) using Visual Studio 2019.
 - **JpegTran** - version 12 Januarary 2020, [binaries](https://jpegclub.org/jpegtran/) released by the Independent JPEG Group.
-- **LibAvif** - version 0.10.1 (using AOM 3.3.0), built from [source](https://github.com/AOMediaCodec/libavif) using CMake and Ninja.
+- **LibAvif** - version 1.0.4 (using AOM 3.8.1), built from [source](https://github.com/AOMediaCodec/libavif/releases/tag/v1.0.4) using CMake and Visual Studio 2022.
 
 Dependencies of binaries downloaded and built using Vcpkg.
 

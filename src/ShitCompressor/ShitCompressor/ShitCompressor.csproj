@@ -21,18 +21,11 @@
 
 	<ItemGroup>
 		<None Remove="Exe\jpegtran.bat" />
-		<None Remove="Exe\settings.json" />
 		<None Remove="Exe\ssimulacra.exe" />
 		<None Remove="Fonts\Roboto-Medium.ttf" />
 		<None Remove="Fonts\Roboto-Regular.ttf" />
 		<None Remove="Images\drop-image-here.png" />
 		<None Remove="Images\fabric.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="Exe\settings.json">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -96,6 +89,9 @@
 	  <None Update="Exe\jpeg62.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Exe\jpeg8.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Exe\jpegoptim.bat">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
@@ -111,7 +107,13 @@
 	  <None Update="Exe\libpng16.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="Exe\lzma.dll">
+	  <None Update="Exe\libsharpyuv.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Exe\libwebp.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Exe\libwebpdecoder.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Exe\opencv_core4.dll">
@@ -123,16 +125,13 @@
 	  <None Update="Exe\opencv_imgproc4.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Exe\settings.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Exe\ssimx.exe">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Exe\tiff.dll">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Exe\webp.dll">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	  <None Update="Exe\webpdecoder.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Exe\zlib1.dll">
