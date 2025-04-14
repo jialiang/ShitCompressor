@@ -64,11 +64,11 @@ Only 1 self-contained x64-Windows binary is provided.
 - **Guetzli** - version 1.0.1, built from source using Visual Studio 2022, modified from [original](https://github.com/google/guetzli/releases/tag/v1.0.1) to allow setting quality < 84.
 - **MozJpeg** - version 4.1.1, built from [source](https://github.com/mozilla/mozjpeg/releases/tag/v4.1.1) using CMake and Visual Studio 2022.
 - **JpegOptim** - version 1.5.5, [binaries](https://github.com/tjko/jpegoptim/releases/tag/v1.5.5) released by Timo Kokkonen.
-- **LibWebP** - version 1.3.2, [binaries](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/index.html) released by Google.
+- **LibWebP** - version 1.5.0, [binaries](https://storage.googleapis.com/downloads.webmproject.org/releases/webp/index.html) released by Google.
 - **SSIM-X** - version v1.0.2, built from [source](https://github.com/jialiang/SSIM-X) using Visual Studio 2022.
 - **Butteraugli** - version 20 March 2019, built from [source](https://github.com/google/butteraugli) using Visual Studio 2019.
-- **JpegTran** - version 12 Januarary 2020, [binaries](https://jpegclub.org/jpegtran/) released by the Independent JPEG Group.
-- **LibAvif** - version 1.0.4 (using AOM 3.8.1), built from [source](https://github.com/AOMediaCodec/libavif/releases/tag/v1.0.4) using CMake and Visual Studio 2022.
+- **JpegTran** - version 12 January 2020, [binaries](https://jpegclub.org/jpegtran/) released by the Independent JPEG Group.
+- **LibAvif** - version 1.2.1 (using AOM 3.11.0), built from [source](https://github.com/AOMediaCodec/libavif/releases/tag/v1.2.1) using CMake and Visual Studio 2022.
 
 Dependencies of binaries downloaded and built using Vcpkg.
 

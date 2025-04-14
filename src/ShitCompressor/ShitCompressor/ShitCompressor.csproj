@@ -24,8 +24,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="Exe\jpegtran.bat" />
-		<None Remove="Exe\ssimulacra.exe" />
 		<None Remove="Fonts\Roboto-Medium.ttf" />
 		<None Remove="Fonts\Roboto-Regular.ttf" />
 		<None Remove="Images\drop-image-here.png" />
@@ -90,6 +88,9 @@
 	  <None Update="Exe\guetzli.exe">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Exe\iconv-2.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Exe\jpeg62.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
@@ -118,6 +119,12 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Exe\libwebpdecoder.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Exe\libxml2.dll">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Exe\libyuv.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Exe\opencv_core4.dll">
